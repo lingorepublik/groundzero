@@ -3,8 +3,11 @@
   "version": "1.0.0",
   "private": true,
   "description": "",
+  "type": "module",
   "scripts": {
-    "typecheck": "npm run typecheck --workspaces"
+    "typecheck": "npm run typecheck --workspaces",
+    "lint": "npm run lint --workspaces",
+    "lint:fix": "npm run lint:fix --workspaces"
   },
   "workspaces": [
     "apps/*",
