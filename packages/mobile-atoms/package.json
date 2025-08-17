@@ -1,0 +1,14 @@
+{
+  "name": "mobile-atoms",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
