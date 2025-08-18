@@ -10,5 +10,5 @@
     /* Bundler mode */
     "jsx": "react-jsx"
   },
-  "include": ["src"]
+  "include": ["src", "index.ts"]
 }
