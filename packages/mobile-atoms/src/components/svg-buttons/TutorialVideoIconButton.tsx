@@ -15,7 +15,7 @@ const TutorialVideoButton = ({ disabled }: Props) => (
       height="40"
       viewBox="0 0 7.4926223 10.583333"
       css={css`
-        stroke: ${disabled ? Colors.paleGray : "#8E8E8E"};
+        stroke: ${disabled ? Colors.paleGray : Colors.ashGray};
         stroke-width: 0.264583;
         fill: none;
         stroke-opacity: 1;
