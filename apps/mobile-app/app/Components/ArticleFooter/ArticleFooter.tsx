@@ -16,7 +16,7 @@ export default function ArticleFooter() {
   return (
     <Container>
       <MenuBar>
-        <TranslationIconButton disabled={true} active={false} />
+        <TranslationIconButton disabled={false} active={false} />
         <TutorialIconButton />
         <TutorialVideoButton disabled />
       </MenuBar>

@@ -11,7 +11,7 @@ const TutorialIconButton = () => (
       height="40"
       viewBox="0 0 7.4926223 10.583333"
       css={css`
-        stroke: #8E8E8E;
+        stroke: ${Colors.ashGray};
         stroke-width: 0.264583;
         fill: none;
         stroke-opacity: 1;
