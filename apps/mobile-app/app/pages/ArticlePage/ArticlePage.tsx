@@ -1,14 +1,18 @@
 import React from "react";
+import { Container } from "./ArticlePage.styles";
+import { ArticleBody, ArticleFooter, ArticleHeader } from "~/Components";
 
 type Props = {
-  title?: string;
-  page?: string;
+  title: string;
+  page: string;
 };
 
 export default function ArticlePage({ title, page }: Props) {
   return (
-    <div>
-      ArticlePage, {title} {page}
-    </div>
+    <Container>
+      <ArticleHeader />
+      <ArticleBody />
+      <ArticleFooter />
+    </Container>
   );
 }

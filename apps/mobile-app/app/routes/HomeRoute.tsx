@@ -1,4 +1,3 @@
-import { CircleButton } from "mobile-atoms";
 import type { Route } from "./+types/HomeRoute";
 
 export function meta({}: Route.MetaArgs) {
@@ -9,9 +8,5 @@ export function meta({}: Route.MetaArgs) {
 }
 
 export default function Home() {
-  return (
-    <div>
-      mobile-app <CircleButton />
-    </div>
-  );
+  return <div>mobile-app</div>;
 }
