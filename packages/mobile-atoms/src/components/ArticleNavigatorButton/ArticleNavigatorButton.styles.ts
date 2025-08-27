@@ -4,11 +4,17 @@ type ContainerProps = {
   backgroundColor: string;
 };
 
-export const Container = styled.button<ContainerProps>`
-  all: unset;
-  cursor: pointer;
+export const Container = styled.div`
   width: 34px;
   height: 34px;
+  position: relative;
+`;
+
+export const NavigatorButton = styled.button<ContainerProps>`
+  all: unset;
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
   border-radius: 50%;
   display: flex;
   justify-content: center;

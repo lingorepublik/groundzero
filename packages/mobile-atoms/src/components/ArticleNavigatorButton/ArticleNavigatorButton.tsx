@@ -1,6 +1,11 @@
 import { type PropsWithChildren } from "react";
-import { Container, Content } from "./ArticleNavigatorButton.styles";
+import {
+  NavigatorButton,
+  Content,
+  Container,
+} from "./ArticleNavigatorButton.styles";
 import { ArticleNavigatorButtonProgress } from "../ArticleNavigatorButtonProgress";
+import { StarIcon } from "../svg-icons";
 
 const getColors = (
   isStarred: boolean,
@@ -59,12 +64,15 @@ export default function ArticleNavigatorButton({
   );
 
   return (
-    <Container backgroundColor={background}>
-      <Content textColor={text}>{children}</Content>
-      <ArticleNavigatorButtonProgress
-        progress={progress}
-        backgroundColor={wave}
-      />
+    <Container>
+      <NavigatorButton backgroundColor={background}>
+        <Content textColor={text}>{children}</Content>
+        <ArticleNavigatorButtonProgress
+          progress={progress}
+          backgroundColor={wave}
+        />
+      </NavigatorButton>
+      {isStarred && <StarIcon />}
     </Container>
   );
 }
