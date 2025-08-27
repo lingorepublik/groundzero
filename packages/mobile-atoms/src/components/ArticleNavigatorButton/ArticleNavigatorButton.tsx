@@ -3,6 +3,7 @@ import {
   NavigatorButton,
   Content,
   Container,
+  Star
 } from "./ArticleNavigatorButton.styles";
 import { ArticleNavigatorButtonProgress } from "../ArticleNavigatorButtonProgress";
 import { StarIcon } from "../svg-icons";
@@ -42,6 +43,8 @@ const getColors = (
   return colors;
 };
 
+const rotation = () => Math.floor(Math.random() * 36);
+
 type Props = {
   isStarred: boolean;
   isDisabled: boolean;
@@ -72,7 +75,11 @@ export default function ArticleNavigatorButton({
           backgroundColor={wave}
         />
       </NavigatorButton>
-      {isStarred && <StarIcon />}
+      {isStarred && (
+        <Star rotation={rotation()}>
+          <StarIcon />
+        </Star>
+      )}
     </Container>
   );
 }

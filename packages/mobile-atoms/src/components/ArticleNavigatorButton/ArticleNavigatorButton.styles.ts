@@ -33,3 +33,17 @@ export const Content = styled.div<ContentProps>`
   color: ${(props) => props.textColor};
   z-index: 1;
 `;
+
+type StarProps = {
+  rotation: number;
+};
+
+export const Star = styled.div<StarProps>`
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  top: -7px;
+  left: -5px;
+  z-index: 2;
+  transform: rotate(${(props) => props.rotation}deg);
+`;
