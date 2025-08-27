@@ -1,4 +1,4 @@
-import { ArticleNavigatorButton, ArticleNavigatorWave } from "mobile-atoms";
+import { ArticleNavigatorButton, ArticleNavigatorWave, TrophyIcon } from "mobile-atoms";
 import {
   ArticalNavigator,
   ArticalNavigatorEnd,
@@ -53,7 +53,9 @@ export default function ArticleHeader() {
         </ArticalNavigator>
         <ArticalNavigatorEnd />
       </ArticleNavigatorContainer>
-      <TestPokalHolter />
+      <TestPokalHolter>
+        <TrophyIcon />
+      </TestPokalHolter>
       <TestCircle />
     </Container>
   );

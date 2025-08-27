@@ -48,5 +48,5 @@ export const TestCircle = styled.div`
 export const TestPokalHolter = styled.div`
   width: 50px;
   height: 46px;
-  background-color: #eaeaea;
+  /* background-color: #eaeaea; */
 `;
