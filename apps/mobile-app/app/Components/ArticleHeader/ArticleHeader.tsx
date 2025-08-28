@@ -1,4 +1,8 @@
-import { ArticleNavigatorButton, ArticleNavigatorWave, TrophyIcon } from "mobile-atoms";
+import {
+  ArticleNavigatorButton,
+  ArticleNavigatorWave,
+  TrophyIcon,
+} from "mobile-atoms";
 import {
   ArticalNavigator,
   ArticalNavigatorEnd,
@@ -6,6 +10,7 @@ import {
   ArticleNavigatorContainer,
   Container,
   TestCircle,
+  TestPokal,
   TestPokalHolter,
 } from "./ArticleHeader.styles";
 
@@ -24,6 +29,7 @@ const articleNavigation: Array<ArticleNavigatorItem> = [
   { number: 3, progress: 0.2, isActive: true },
   { number: 4, progress: 0.4, isDisabled: true, isStarred: true },
   { number: 5, progress: 0.2, isDisabled: true, isStarred: true },
+  // { number: 5, progress: 0.2, isDisabled: true, isStarred: true },
   // { progress: 0 },
   // { progress: 0 },
   // { progress: 0 },
@@ -54,7 +60,9 @@ export default function ArticleHeader() {
         <ArticalNavigatorEnd />
       </ArticleNavigatorContainer>
       <TestPokalHolter>
-        <TrophyIcon />
+        <TestPokal>
+          <TrophyIcon />
+        </TestPokal>
       </TestPokalHolter>
       <TestCircle />
     </Container>

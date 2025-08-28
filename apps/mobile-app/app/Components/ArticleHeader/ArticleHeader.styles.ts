@@ -50,3 +50,8 @@ export const TestPokalHolter = styled.div`
   height: 46px;
   /* background-color: #eaeaea; */
 `;
+
+export const TestPokal = styled.div`
+  width: 24px;
+  height: 24px;
+`;
