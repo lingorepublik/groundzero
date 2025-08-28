@@ -45,13 +45,15 @@ export const TestCircle = styled.div`
   cursor: pointer;
 `;
 
-export const TestPokalHolter = styled.div`
-  width: 50px;
+export const Trophies = styled.div`
+  width: 52px;
   height: 46px;
-  /* background-color: #eaeaea; */
+  display: flex;
+  padding-top: 8px;
+  gap: 4px;
 `;
 
-export const TestPokal = styled.div`
+export const Trophy = styled.div`
   width: 24px;
   height: 24px;
 `;

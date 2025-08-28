@@ -10,8 +10,8 @@ import {
   ArticleNavigatorContainer,
   Container,
   TestCircle,
-  TestPokal,
-  TestPokalHolter,
+  Trophy,
+  Trophies,
 } from "./ArticleHeader.styles";
 
 type ArticleNavigatorItem = {
@@ -59,11 +59,14 @@ export default function ArticleHeader() {
         </ArticalNavigator>
         <ArticalNavigatorEnd />
       </ArticleNavigatorContainer>
-      <TestPokalHolter>
-        <TestPokal>
-          <TrophyIcon />
-        </TestPokal>
-      </TestPokalHolter>
+      <Trophies>
+        <Trophy>
+          <TrophyIcon progress={0.7} />
+        </Trophy>
+        <Trophy>
+          <TrophyIcon progress={0.3} isStarred />
+        </Trophy>
+      </Trophies>
       <TestCircle />
     </Container>
   );
