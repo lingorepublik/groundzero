@@ -1,8 +1,6 @@
-import React from 'react'
-import { Container } from './ArticleBody.styles'
+import React from "react";
+import { Container } from "./ArticleBody.styles";
 
 export default function ArticleBody() {
-  return (
-    <Container>ArticleBody</Container>
-  )
+  return <Container></Container>;
 }
