@@ -27,6 +27,7 @@ const articleNavigation: Array<ArticleNavigatorItem> = [
   { number: 2, progress: 1 },
   // { number: 2, progress: 0 },
   { number: 3, progress: 0.2, isActive: true },
+  // { number: 3, progress: 0.2, isActive: true },
   { number: 4, progress: 0.4, isDisabled: true, isStarred: true },
   { number: 5, progress: 0.2, isDisabled: true, isStarred: true },
   // { number: 5, progress: 0.2, isDisabled: true, isStarred: true },
