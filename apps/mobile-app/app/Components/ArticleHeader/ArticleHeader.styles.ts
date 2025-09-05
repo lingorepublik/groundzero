@@ -25,7 +25,7 @@ export const ArticalNavigator = styled.div`
   overflow-y: auto;
   display: flex;
   position: relative;
-  height: 48px;
+  /* height: 48px; */
   padding-right: 2px;
 `;
 
@@ -46,10 +46,10 @@ export const TestCircle = styled.div`
 `;
 
 export const Trophies = styled.div`
-  width: 52px;
-  height: 46px;
+  /* width: 52px;
+  height: 46px; */
   display: flex;
-  padding-top: 8px;
+  /* padding-top: 8px; */
   gap: 4px;
 `;
 
