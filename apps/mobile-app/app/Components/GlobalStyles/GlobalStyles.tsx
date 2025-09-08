@@ -10,6 +10,7 @@ export default function GlobalStyles() {
           margin: 0;
           box-sizing: border-box;
           font-family: "Arial", "Helvetica", sans-serif;
+          touch-action: manipulation;
         }
       `}
     />

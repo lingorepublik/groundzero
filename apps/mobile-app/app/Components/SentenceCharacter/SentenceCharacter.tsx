@@ -29,7 +29,7 @@ export default function ArticleCharacter({
         {type === "thought" && (
           <>
             <ThoughtIndicator direction={direction} />
-            <ThoughtIndicator2  direction={direction} />
+            <ThoughtIndicator2 direction={direction} />
           </>
         )}
       </Avatar>

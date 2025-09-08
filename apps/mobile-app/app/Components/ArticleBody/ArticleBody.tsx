@@ -1,19 +1,15 @@
-import React from "react";
 import {
   ArticleTitle,
   Container,
   ArticleTextContainer,
-  ArticleTitleTexts,
   ArticleTitleHeadphoneIcon,
+  ArticleTitleTexts,
   ArticleTitleNative,
-  TextTranslated,
-  ArticleText,
-  TextNative,
-  ArticleSentence,
+  ArticleTitleTranslated,
 } from "./ArticleBody.styles";
-import { SentenseCharacter } from "../SentenceCharacter";
+import { Sentence } from "../Sentence";
 
-const ArticlesSentenses = [
+const ArticlesSentences = [
   {
     native: "ask daks dalkds lakds",
     translated: "aksj hdkjsa hdkjash dkasjd kjh ads",
@@ -21,7 +17,7 @@ const ArticlesSentenses = [
   {
     native: "ask daks dalkds lakds",
     translated: "aksj hdkjsa hdkjash dkasjd kjh ads",
-    sentenseBaloonDirection: "left",
+    sentenceBaloonDirection: "left",
     sentenceBaloonType: "speech",
     character: "Emma",
     avatar: "",
@@ -30,7 +26,7 @@ const ArticlesSentenses = [
   {
     native: "ask daks dalkds lakds",
     translated: "aksj hdkjsa hdkjash dkasjd kjh ads",
-    sentenseBaloonDirection: "right",
+    sentenceBaloonDirection: "right",
     sentenceBaloonType: "speech",
     character: "Theo",
     avatar: "",
@@ -39,7 +35,7 @@ const ArticlesSentenses = [
   {
     native: "askas asd asd asa sd asd daks dalkds lakds",
     translated: "aksj hdkjsaa sd aasd asd as hdkjash dkasjd kjh ads",
-    sentenseBaloonDirection: "left",
+    sentenceBaloonDirection: "left",
     sentenceBaloonType: "thought",
     character: "Emma",
     avatar: "",
@@ -56,7 +52,7 @@ const ArticlesSentenses = [
   {
     native: "askas asd asd asa sd asd daks dalkds lakds",
     translated: "aksj hdkjsaa sd aasd asd as hdkjash dkasjd kjh ads",
-    sentenseBaloonDirection: "right",
+    sentenceBaloonDirection: "right",
     sentenceBaloonType: "thought",
     character: "Theo",
     avatar: "",
@@ -82,36 +78,14 @@ export default function ArticleBody() {
       <ArticleTitle>
         <ArticleTitleTexts>
           <ArticleTitleNative>Die Vorbereitung</ArticleTitleNative>
-          <TextTranslated>The preparation</TextTranslated>
+          <ArticleTitleTranslated>The preparation</ArticleTitleTranslated>
         </ArticleTitleTexts>
         <ArticleTitleHeadphoneIcon />
         {/* Die Vorbereitung */}
       </ArticleTitle>
       <ArticleTextContainer>
-        {ArticlesSentenses.map((sentense) => (
-          <ArticleSentence
-            alignRight={sentense.sentenseBaloonDirection === "right"}
-          >
-            {sentense.sentenseBaloonDirection === "left" && (
-              <SentenseCharacter
-                name={sentense.character}
-                type={sentense.sentenceBaloonType}
-              />
-            )}
-            <ArticleText
-              alignRight={sentense.sentenseBaloonDirection === "right"}
-            >
-              <TextNative>{sentense.native}</TextNative>
-              <TextTranslated>{sentense.translated}</TextTranslated>
-            </ArticleText>
-            {sentense.sentenseBaloonDirection === "right" && (
-              <SentenseCharacter
-                name={sentense.character}
-                direction="right"
-                type={sentense.sentenceBaloonType}
-              />
-            )}
-          </ArticleSentence>
+        {ArticlesSentences.map((sentence, index) => (
+          <Sentence key={index} sentence={sentence} />
         ))}
       </ArticleTextContainer>
     </Container>
