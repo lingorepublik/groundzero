@@ -33,7 +33,7 @@ export const ArticleTitleNative = styled.div`
   color: #333;
 `;
 
-export const TextTranslated = styled.div`
+export const ArticleTitleTranslated = styled.div`
   font-size: 16px;
   color: #23d280;
   font-style: italic;
@@ -65,19 +65,4 @@ export const ArticleTextContainer = styled.div`
   padding-top: 20px;
   overflow-y: auto;
   /* background-color: red; */
-`;
-
-type ArticleTextProps = {
-  alignRight: boolean;
-};
-
-export const ArticleText = styled.div<ArticleTextProps>`
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-  text-align: ${(props) => (props.alignRight ? "right" : "left")};
-`;
-
-export const TextNative = styled.div`
-  font-size: 20px;
 `;
