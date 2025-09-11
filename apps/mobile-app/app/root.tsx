@@ -7,6 +7,8 @@ import {
   ScrollRestoration,
 } from "react-router";
 
+import { QueryProvider } from "react-query";
+
 import type { Route } from "./+types/root";
 import { GlobalStyles } from "./Components";
 
@@ -32,7 +34,9 @@ export default function App() {
   return (
     <>
       <GlobalStyles />
-      <Outlet />
+      <QueryProvider>
+        <Outlet />
+      </QueryProvider>
     </>
   );
 }

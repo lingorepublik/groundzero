@@ -7,14 +7,13 @@ import {
   Word,
 } from "./Sentence.styles";
 import { SentenseCharacter } from "../SentenceCharacter";
-import { type Sentence } from "./Sentence.types";
+import { type SentenceUnit } from "./Sentence.types";
 
 type Props = {
-  sentence: Sentence;
+  sentenceUnit: SentenceUnit;
 };
 
-export default function Sentence({ sentence }: Props) {
-  const [selectedWord, setSelectedWord] = useState<string | null>(null);
+export default function Sentence({ sentenceUnit }: Props) {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const [isSentenceSelected, setIsSentenceSelected] = useState(false);
 
@@ -33,7 +32,6 @@ export default function Sentence({ sentence }: Props) {
         !wordRefs.current.some((ref) => ref?.contains(e.target as Node))
       ) {
         setIsSentenceSelected(false);
-        setSelectedWord(null);
         setSelectedIndex(null);
       }
     };
@@ -46,78 +44,87 @@ export default function Sentence({ sentence }: Props) {
   }, []);
 
   const timerRef = useRef<NodeJS.Timeout | null>(null);
+  const pressStartTimeRef = useRef<number | null>(null);
 
-  const startPress = (
-    e: React.PointerEvent<HTMLSpanElement>,
-    word: string | null,
-    index: number | null
-  ) => {
+  const startPress = (e: React.PointerEvent<HTMLSpanElement>) => {
     e.preventDefault();
-    setIsSentenceSelected(false);
-    if (selectedIndex === index) {
-      setSelectedWord(null);
-      setSelectedIndex(null);
-    } else {
-      setSelectedWord(word);
-      setSelectedIndex(index);
-    }
+    pressStartTimeRef.current = Date.now();
 
     timerRef.current = setTimeout(() => {
-      setSelectedWord(null);
       setSelectedIndex(null);
       setIsSentenceSelected(true);
-    }, 300);
+    }, 500);
   };
 
-  const endPress = () => {
+  const endPress = (index: number) => {
     if (timerRef.current) {
       clearTimeout(timerRef.current);
       timerRef.current = null;
+      if (!isSentenceSelected) {
+        console.log("sentence not selected");
+        if (selectedIndex === index) {
+          setSelectedIndex(null);
+        } else {
+          setSelectedIndex(index);
+        }
+      } else if (pressStartTimeRef.current) {
+        const duration = Date.now() - pressStartTimeRef.current;
+        console.log(duration);
+        if (duration < 500) {
+          setIsSentenceSelected(false);
+        }
+      }
     }
+
+    pressStartTimeRef.current = null;
   };
 
   return (
-    <Container alignRight={sentence.sentenceBaloonDirection === "right"}>
-      {sentence.character && sentence.sentenceBaloonDirection === "left" && (
-        <SentenseCharacter
-          name={sentence.character}
-          type={sentence.sentenceBaloonType}
-        />
-      )}
-      <ArticleText alignRight={sentence.sentenceBaloonDirection === "right"}>
+    <Container alignRight={sentenceUnit.sentenceBaloonDirection === "right"}>
+      {sentenceUnit.character &&
+        sentenceUnit.sentenceBaloonDirection === "left" && (
+          <SentenseCharacter
+            name={sentenceUnit.character}
+            type={sentenceUnit.sentenceBaloonType}
+          />
+        )}
+      <ArticleText
+        alignRight={sentenceUnit.sentenceBaloonDirection === "right"}
+      >
         <TextNative
-          alignRight={sentence.sentenceBaloonDirection === "right"}
-          // onClick={handleSentenceSelect}
+          alignRight={sentenceUnit.sentenceBaloonDirection === "right"}
         >
-          {sentence.native
-            .trim()
-            .split(" ")
-            .map((word: string, index: number) => (
-              <Word
-                key={index}
-                selected={isSentenceSelected || index === selectedIndex}
-                onPointerDown={(e) => startPress(e, word, index)}
-                onPointerUp={endPress}
-                onPointerCancel={endPress}
-                onPointerLeave={endPress}
-                onContextMenu={(e) => e.preventDefault()}
-                ref={setWordRef}
-              >
-                {word}
-              </Word>
-            ))}
+          {sentenceUnit.sentence.map((word, index) => (
+            <Word
+              key={index}
+              isRightMargin={
+                sentenceUnit.sentence[index + 1] &&
+                !sentenceUnit.sentence[index + 1]?.punctuationMark
+              }
+              ref={setWordRef}
+              onContextMenu={(e) => e.preventDefault()}
+              onPointerDown={(e) => startPress(e)}
+              onPointerUp={() => endPress(index)}
+              onPointerCancel={() => endPress(index)}
+              onPointerLeave={() => endPress(index)}
+              selected={isSentenceSelected || index === selectedIndex}
+            >
+              {word.word}
+            </Word>
+          ))}
         </TextNative>
-        {sentence.translated && (
-          <TextTranslated>{sentence.translated}</TextTranslated>
+        {sentenceUnit.translation && (
+          <TextTranslated>{sentenceUnit.translation}</TextTranslated>
         )}
       </ArticleText>
-      {sentence.character && sentence.sentenceBaloonDirection === "right" && (
-        <SentenseCharacter
-          name={sentence.character}
-          direction="right"
-          type={sentence.sentenceBaloonType}
-        />
-      )}
+      {sentenceUnit.character &&
+        sentenceUnit.sentenceBaloonDirection === "right" && (
+          <SentenseCharacter
+            name={sentenceUnit.character}
+            direction="right"
+            type={sentenceUnit.sentenceBaloonType}
+          />
+        )}
     </Container>
   );
 }

@@ -11,6 +11,8 @@ export const MenuBar = styled.div`
   justify-content: flex-end;
   padding: 5px;
   gap: 5px;
+  position: relative;
+  transition: all 0.3s;
   /* background-color: red; */
 `;
 
@@ -50,4 +52,17 @@ export const ArticleTitleTranslation = styled.div`
 export const GrammerPoint = styled.div`
   font-size: 22px;
   color: ${Colors.tropicalPine};
+`;
+
+export const Sheet = styled.div`
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100px;
+  background-color: black;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  color: white;
+  transition: all 0.3s;
 `;
