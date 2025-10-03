@@ -7,72 +7,12 @@ import {
   ArticleTitleNative,
   ArticleTitleTranslated,
 } from "./ArticleBody.styles";
-import { Sentence } from "../Sentence";
-
-const ArticlesSentences = [
-  {
-    native: "ask daks dalkds lakds",
-    translated: "aksj hdkjsa hdkjash dkasjd kjh ads",
-  },
-  {
-    native: "ask daks dalkds lakds",
-    translated: "aksj hdkjsa hdkjash dkasjd kjh ads",
-    sentenceBaloonDirection: "left",
-    sentenceBaloonType: "speech",
-    character: "Emma",
-    avatar: "",
-    expression: "talk",
-  },
-  {
-    native: "ask daks dalkds lakds",
-    translated: "aksj hdkjsa hdkjash dkasjd kjh ads",
-    sentenceBaloonDirection: "right",
-    sentenceBaloonType: "speech",
-    character: "Theo",
-    avatar: "",
-    expression: "smile",
-  },
-  {
-    native: "askas asd asd asa sd asd daks dalkds lakds",
-    translated: "aksj hdkjsaa sd aasd asd as hdkjash dkasjd kjh ads",
-    sentenceBaloonDirection: "left",
-    sentenceBaloonType: "thought",
-    character: "Emma",
-    avatar: "",
-    expression: "think",
-  },
-  {
-    native: "ask daks dalkds lakds",
-    translated: "aksj hdkjsa hdkjash dkasjd kjh ads",
-  },
-  {
-    native: "ask daks dalkds lakds",
-    translated: "aksj hdkjsa hdkjash dkasjd kjh ads",
-  },
-  {
-    native: "askas asd asd asa sd asd daks dalkds lakds",
-    translated: "aksj hdkjsaa sd aasd asd as hdkjash dkasjd kjh ads",
-    sentenceBaloonDirection: "right",
-    sentenceBaloonType: "thought",
-    character: "Theo",
-    avatar: "",
-    expression: "think",
-  },
-  {
-    native: "ask daks dalkds lakds",
-    translated: "aksj hdkjsa hdkjash dkasjd kjh ads",
-  },
-  {
-    native: "ask daks dalkds lakds",
-    translated: "aksj hdkjsa hdkjash dkasjd kjh ads",
-  },
-  {
-    native: "ask daks dalkds lakds",
-    translated: "aksj hdkjsa hdkjash dkasjd kjh ads",
-  },
-];
+import { type SentenceUnit, Sentence } from "../Sentence";
+import { useArticlePage } from "react-query";
 
 export default function ArticleBody() {
+  const { data } = useArticlePage();
+
   return (
     <Container>
       <ArticleTitle>
@@ -81,11 +21,10 @@ export default function ArticleBody() {
           <ArticleTitleTranslated>The preparation</ArticleTitleTranslated>
         </ArticleTitleTexts>
         <ArticleTitleHeadphoneIcon />
-        {/* Die Vorbereitung */}
       </ArticleTitle>
       <ArticleTextContainer>
-        {ArticlesSentences.map((sentence, index) => (
-          <Sentence key={index} sentence={sentence} />
+        {data?.map((sentenceUnit, index) => (
+          <Sentence key={index} sentenceUnit={sentenceUnit} />
         ))}
       </ArticleTextContainer>
     </Container>

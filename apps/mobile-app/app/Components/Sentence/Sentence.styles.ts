@@ -33,9 +33,9 @@ type TextNativeProps = {
 };
 
 export const TextNative = styled.div<TextNativeProps>`
-  font-size: 20px;
+  font-size: 18px;
   display: flex;
-  gap: 4px;
+  /* gap: 4px; */
   flex-wrap: wrap;
 
   ${({ alignRight }) =>
@@ -45,11 +45,13 @@ export const TextNative = styled.div<TextNativeProps>`
 
 type WordProps = {
   selected?: boolean;
+  isRightMargin?: boolean;
 };
 
 export const Word = styled.span<WordProps>`
   user-select: none;
   -webkit-user-select: none;
   -webkit-touch-callout: none;
+  margin-right: ${(props) => props.isRightMargin && "4px"};
   ${({ selected }) => selected && "background-color: yellow"}
 `;

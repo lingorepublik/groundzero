@@ -2,7 +2,6 @@ import styled from "@emotion/styled";
 
 export const Container = styled.section`
   flex: 1;
-  /* background-color: gray; */
   display: flex;
   flex-direction: column;
   padding: 0 30px;
