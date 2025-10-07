@@ -8,14 +8,19 @@ import {
 } from "./Sentence.styles";
 import { SentenseCharacter } from "../SentenceCharacter";
 import { type SentenceUnit } from "./Sentence.types";
+import { useInsight } from "react-query";
 
 type Props = {
   sentenceUnit: SentenceUnit;
 };
 
 export default function Sentence({ sentenceUnit }: Props) {
-  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+  const [selectedWordIndex, setSelectedWordIndex] = useState<number | null>(
+    null
+  );
   const [isSentenceSelected, setIsSentenceSelected] = useState(false);
+
+  const { setInsight } = useInsight();
 
   const wordRefs = useRef<Array<HTMLSpanElement>>([]);
 
@@ -32,7 +37,7 @@ export default function Sentence({ sentenceUnit }: Props) {
         !wordRefs.current.some((ref) => ref?.contains(e.target as Node))
       ) {
         setIsSentenceSelected(false);
-        setSelectedIndex(null);
+        setSelectedWordIndex(null);
       }
     };
 
@@ -41,7 +46,7 @@ export default function Sentence({ sentenceUnit }: Props) {
     return () => {
       document.removeEventListener("pointerdown", handleClickOutside);
     };
-  }, []);
+  }, [setInsight, isSentenceSelected]);
 
   const timerRef = useRef<NodeJS.Timeout | null>(null);
   const pressStartTimeRef = useRef<number | null>(null);
@@ -51,27 +56,44 @@ export default function Sentence({ sentenceUnit }: Props) {
     pressStartTimeRef.current = Date.now();
 
     timerRef.current = setTimeout(() => {
-      setSelectedIndex(null);
+      setSelectedWordIndex(null);
       setIsSentenceSelected(true);
+      setInsight([
+        sentenceUnit.translation || null,
+        sentenceUnit.insight || null,
+      ]);
     }, 500);
   };
 
-  const endPress = (index: number) => {
+  const endPress = (index: number, refIndex?: number) => {
     if (timerRef.current) {
       clearTimeout(timerRef.current);
       timerRef.current = null;
       if (!isSentenceSelected) {
         console.log("sentence not selected");
-        if (selectedIndex === index) {
-          setSelectedIndex(null);
+        if (selectedWordIndex === index || selectedWordIndex === refIndex) {
+          setSelectedWordIndex(null);
+          setInsight([]);
         } else {
-          setSelectedIndex(index);
+          if (refIndex) {
+            setSelectedWordIndex(refIndex);
+            setInsight([
+              sentenceUnit.sentence[refIndex].translation || null,
+              sentenceUnit.sentence[refIndex].insight || null,
+            ]);
+          } else {
+            setSelectedWordIndex(index);
+            setInsight([
+              sentenceUnit.sentence[index].translation || null,
+              sentenceUnit.sentence[index].insight || null,
+            ]);
+          }
         }
       } else if (pressStartTimeRef.current) {
         const duration = Date.now() - pressStartTimeRef.current;
-        console.log(duration);
         if (duration < 500) {
           setIsSentenceSelected(false);
+          setInsight([]);
         }
       }
     }
@@ -104,10 +126,14 @@ export default function Sentence({ sentenceUnit }: Props) {
               ref={setWordRef}
               onContextMenu={(e) => e.preventDefault()}
               onPointerDown={(e) => startPress(e)}
-              onPointerUp={() => endPress(index)}
-              onPointerCancel={() => endPress(index)}
-              onPointerLeave={() => endPress(index)}
-              selected={isSentenceSelected || index === selectedIndex}
+              onPointerUp={() => endPress(index, word.refIndex)}
+              onPointerCancel={() => endPress(index, word.refIndex)}
+              onPointerLeave={() => endPress(index, word.refIndex)}
+              selected={
+                isSentenceSelected ||
+                index === selectedWordIndex ||
+                word.refIndex === selectedWordIndex
+              }
             >
               {word.word}
             </Word>

@@ -59,10 +59,11 @@ export const Sheet = styled.div`
   left: 0;
   bottom: 0;
   width: 100%;
-  height: 100px;
-  background-color: black;
+  max-height: 50vh;
+  overflow-y: auto;
+  background-color: #3f3f3f;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
   color: white;
-  transition: all 0.3s;
+  padding: 15px 15px 30px;
 `;

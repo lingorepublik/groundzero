@@ -13,9 +13,10 @@ import TutorialIconButton from "mobile-atoms/src/components/svg-buttons/Tutorial
 import TutorialVideoButton from "mobile-atoms/src/components/svg-buttons/TutorialVideoIconButton";
 import TranslationIconButton from "mobile-atoms/src/components/svg-buttons/TranslationIconButton";
 import { useInsight } from "react-query";
+import Insight from "../Insight/Insight";
 
 export default function ArticleFooter() {
-  const { data } = useInsight(null);
+  const { insight } = useInsight();
 
   return (
     <Container>
@@ -23,7 +24,11 @@ export default function ArticleFooter() {
         <TranslationIconButton disabled={false} active={false} />
         <TutorialIconButton />
         <TutorialVideoButton disabled />
-        {data && <Sheet>data: {data}</Sheet>}
+        {insight?.length && insight.length > 0 && (
+          <Sheet>
+            <Insight translation={insight[0]} insight={insight[1]}></Insight>
+          </Sheet>
+        )}
       </MenuBar>
       <ArticleInfo>
         <LanguageLevel>A1</LanguageLevel>
