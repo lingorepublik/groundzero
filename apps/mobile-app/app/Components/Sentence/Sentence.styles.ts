@@ -49,9 +49,10 @@ type WordProps = {
 };
 
 export const Word = styled.span<WordProps>`
+  color: #333;
   user-select: none;
   -webkit-user-select: none;
   -webkit-touch-callout: none;
   margin-right: ${(props) => props.isRightMargin && "4px"};
-  ${({ selected }) => selected && "background-color: yellow"}
+  ${({ selected }) => selected && "background-color: #333; color: #fff"}
 `;

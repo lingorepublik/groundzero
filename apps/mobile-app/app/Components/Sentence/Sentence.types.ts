@@ -8,6 +8,7 @@ export type WordUnit = {
   translation?: string;
   insight?: string;
   punctuationMark?: boolean;
+  refIndex?: number;
 };
 
 export type SentenceUnit = {
@@ -16,4 +17,5 @@ export type SentenceUnit = {
   character?: string;
   sentenceBaloonType?: SentenceBaloonType;
   sentenceBaloonDirection?: SentenceBaloonDirection;
+  insight?: string;
 };

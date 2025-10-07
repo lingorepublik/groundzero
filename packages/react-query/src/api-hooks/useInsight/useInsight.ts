@@ -1,18 +1,19 @@
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 
-const fetchInsight = async (phrase: string | null) => {
-  console.log("inside fetchInsight");
-  if (!phrase) {
-    return null;
-  }
-  return phrase;
-};
+const QUERY_KEY = ["insight"];
 
-export const useInsight = (phrase: string | null) => {
-  return useQuery({
-    queryKey: ["insight"],
-    queryFn: () => fetchInsight(phrase),
-    enabled: false,
-    retry: false,
+export const useInsight = () => {
+  const queryClient = useQueryClient();
+
+  const { data: insight = [null, null] } = useQuery({
+    queryKey: QUERY_KEY,
+    queryFn: () => null,
+    staleTime: Infinity,
   });
+
+  const setInsight = (insight: Array<string | null>) => {
+    queryClient.setQueryData(QUERY_KEY, insight);
+  };
+
+  return { insight, setInsight };
 };

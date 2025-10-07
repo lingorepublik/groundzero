@@ -1,12 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
 
-// w: word
-// cwis: connectedWordIndexes
-// pm: punctuationMark
-// lu: linguisticUnit
-
-// insight is in MarkedDown format
-
 const article = [
   {
     sentence: [
@@ -14,7 +7,7 @@ const article = [
       {
         word: "ziehe",
         translation: "change my clothes / change myself",
-        insight: "reflexive verb - *sich umziehen*:**to change clothes**",
+        insight: "reflexive verb - sich umziehen: *to change clothes*",
       },
       { word: "mich", refIndex: 1 },
       { word: "um", refIndex: 1 },
@@ -49,7 +42,7 @@ const article = [
         word: "auf",
         expression: "warten auf",
         translation: "waiting for",
-        insight: "Infinitive mit artikle - **warten auf**:*wait for*",
+        insight: "Infinitive mit artikle - **warten auf**: *wait for*",
       },
       { word: "mich", translation: "me" },
       { word: "warten", refIndex: 3 },
