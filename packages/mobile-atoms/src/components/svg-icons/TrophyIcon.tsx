@@ -4,9 +4,14 @@ import { Colors } from "../../constants";
 type Props = {
   progress: number;
   isStarred?: boolean;
+  type?: "default" | "gold";
 };
 
-export default function TrophyIcon({ progress, isStarred = false }: Props) {
+export default function TrophyIcon({
+  progress,
+  isStarred = false,
+  type = "default",
+}: Props) {
   const rotation = Math.floor(Math.random() * 31) - 15;
 
   const x = (1 - progress) * 25;
@@ -15,7 +20,7 @@ export default function TrophyIcon({ progress, isStarred = false }: Props) {
     <svg
       viewBox="0 0 40 40"
       fill="none"
-      stroke={Colors.primary}
+      stroke={type === "gold" ? "#ffe291" : Colors.primary}
       strokeWidth="2"
       xmlns="http://www.w3.org/2000/svg"
       transform={`rotate(${rotation})`}
@@ -125,7 +130,8 @@ export default function TrophyIcon({ progress, isStarred = false }: Props) {
           L4.65311 0.947069
           Z
           "
-          fill="#1CC9BA"
+          stroke={type === "gold" ? "#ff9900" : Colors.primary}
+          strokeWidth={2}
         />
       )}
     </svg>

@@ -1,0 +1,1 @@
+export {default as CatalogEntryProgressCircle} from './CatalogEntryProgressCircle';
