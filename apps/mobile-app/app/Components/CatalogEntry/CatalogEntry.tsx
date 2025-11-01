@@ -8,26 +8,21 @@ import {
   ProgressArea,
   Trophy,
 } from "./CatalogEntry.styles";
+import type { Catalog } from "shared";
 
-type Props = {
-  progressList: Array<number>;
-  trophyProgress: number;
-  starredTrophyProgress: number;
-  title: string;
-  titleTranslation?: string;
-  extraText?: string;
-};
+type Props = {} & Catalog;
 
 export default function CatalogEntry({
+  link,
   progressList,
   trophyProgress,
   starredTrophyProgress,
   title,
   titleTranslation,
-  extraText,
+  note,
 }: Props) {
   return (
-    <Container>
+    <Container to={link}>
       <ProgressArea>
         <CatalogEntryProgress progressList={progressList} />
         <Trophy>
@@ -43,7 +38,7 @@ export default function CatalogEntry({
           <TitleTranslation>{titleTranslation}</TitleTranslation>
         )}
       </TitleTexts>
-      {extraText && <Extra>{extraText}</Extra>}
+      {note && <Extra>{note}</Extra>}
     </Container>
   );
 }

@@ -8,10 +8,10 @@ import {
   ArticleTitleTranslated,
 } from "./ArticleBody.styles";
 import { type SentenceUnit, Sentence } from "../Sentence";
-import { useArticlePage } from "react-query";
+import { useArticle } from "react-query";
 
 export default function ArticleBody() {
-  const { data } = useArticlePage();
+  const { data } = useArticle();
 
   return (
     <Container>
