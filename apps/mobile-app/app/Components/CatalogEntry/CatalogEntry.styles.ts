@@ -1,11 +1,13 @@
 import styled from "@emotion/styled";
+import { Link } from "react-router";
 
-export const Container = styled.div`
+export const Container = styled(Link)`
   padding: 10px 10px 10px 100px;
   background-color: #1cc9ba;
   display: flex;
   flex-direction: column;
   gap: 4px;
+  text-decoration: none;
 `;
 
 export const ProgressArea = styled.div`

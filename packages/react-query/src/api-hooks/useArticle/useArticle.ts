@@ -115,13 +115,13 @@ const article = [
   },
 ];
 
-const fetchArticlePage = async () => {
+const fetchArticle = async () => {
   return article;
 };
 
-export const useArticlePage = () => {
+export const useArticle = () => {
   return useQuery({
-    queryKey: ["articlePage"],
-    queryFn: fetchArticlePage,
+    queryKey: ["article"],
+    queryFn: fetchArticle,
   });
 };

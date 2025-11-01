@@ -1,32 +1,27 @@
 import { CatalogEntry } from "~/Components";
 import { Container } from "./CatalogPage.styles";
+import { useCatalog } from "react-query";
 
 export default function CatalogPage() {
+  const { data: catalog, isLoading } = useCatalog();
+
+  if (isLoading) {
+    return;
+  }
+
   return (
     <Container>
-      <CatalogEntry
-        progressList={[0.2, 0.5, 1, 1, 0]}
-        trophyProgress={0.7}
-        starredTrophyProgress={0}
-        title="nach Berlin"
-        titleTranslation="to Berlin"
-        extraText="perfect mit Sein"
-      />
-      <CatalogEntry
-        progressList={[0.2, 0.5, 1, 1, 0]}
-        trophyProgress={0.7}
-        starredTrophyProgress={.8}
-        title="nach Berlin"
-        titleTranslation="to Berlin"
-        extraText="perfect mit Sein"
-      />
+      {catalog?.map((catalogEntry) => (
+        <CatalogEntry
+          link={catalogEntry.link}
+          progressList={catalogEntry.progressList}
+          trophyProgress={catalogEntry.trophyProgress}
+          starredTrophyProgress={catalogEntry.starredTrophyProgress}
+          title={catalogEntry.title}
+          titleTranslation={catalogEntry.titleTranslation}
+          note={catalogEntry.note}
+        />
+      ))}
     </Container>
   );
 }
-
-// progressList,
-//   trophyProgress,
-//   starredTrophyProgress,
-//   title,
-//   titleTranslation,
-//   extraText,
