@@ -1,4 +1,4 @@
-import { useQuery } from "@tanstack/react-query";
+import { type Request, type Response, type NextFunction } from "express";
 
 const article = [
   {
@@ -115,13 +115,14 @@ const article = [
   },
 ];
 
-const fetchArticle = async () => {
-  return article;
-};
-
-export const useArticle = () => {
-  return useQuery({
-    queryKey: ["article"],
-    queryFn: fetchArticle,
-  });
+export const getArticlePage = (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    res.json(article);
+  } catch (e) {
+    next(e);
+  }
 };
