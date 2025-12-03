@@ -3,7 +3,7 @@ import { type Request, type Response, type NextFunction } from "express";
 export const catalogController = (
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ) => {
   try {
     res.json([

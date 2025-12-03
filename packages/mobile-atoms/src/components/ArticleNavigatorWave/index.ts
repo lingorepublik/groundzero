@@ -1,1 +1,1 @@
-export {default as ArticleNavigatorWave} from './ArticleNavigatorWave';
+export { default as ArticleNavigatorWave } from "./ArticleNavigatorWave";

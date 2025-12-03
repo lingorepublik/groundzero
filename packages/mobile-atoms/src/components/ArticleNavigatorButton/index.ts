@@ -1,1 +1,1 @@
-export {default as ArticleNavigatorButton} from './ArticleNavigatorButton';
+export { default as ArticleNavigatorButton } from "./ArticleNavigatorButton";

@@ -1,1 +1,1 @@
-export * from './catalogRoute';
+export * from "./catalogRoute";

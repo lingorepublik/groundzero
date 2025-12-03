@@ -1,1 +1,1 @@
-export {default as CircleContainer} from "./CircleContainer";
+export { default as CircleContainer } from "./CircleContainer";

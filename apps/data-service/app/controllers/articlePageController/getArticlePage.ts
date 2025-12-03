@@ -118,7 +118,7 @@ const article = [
 export const getArticlePage = (
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ) => {
   try {
     res.json(article);

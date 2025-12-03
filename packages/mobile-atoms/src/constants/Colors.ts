@@ -19,5 +19,5 @@ export const Colors = {
   paleGreen: "#CFDDA1",
   AquaBlue: "#69C9C9",
   CalmBlue: "#A5BEBE",
-  ashGray: "#8E8E8E"
+  ashGray: "#8E8E8E",
 };
