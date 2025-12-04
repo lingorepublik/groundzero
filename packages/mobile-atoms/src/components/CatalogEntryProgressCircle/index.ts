@@ -1,1 +1,1 @@
-export {default as CatalogEntryProgressCircle} from './CatalogEntryProgressCircle';
+export { default as CatalogEntryProgressCircle } from "./CatalogEntryProgressCircle";

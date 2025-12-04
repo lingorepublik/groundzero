@@ -58,30 +58,32 @@ export const SpeechIndicator = styled.div<ArrowProps>`
 
 type ThoughtndicatorProps = {
   direction: SentenceBaloonDirection;
-}
+};
 
 export const ThoughtIndicator = styled.div<ThoughtndicatorProps>`
   position: absolute;
   top: 7px;
-  right: ${({direction}) => direction==="left" ? '4px' : 'auto'};
-  left: ${({direction}) => direction==="right" ? '4px' : 'auto'};
+  right: ${({ direction }) => (direction === "left" ? "4px" : "auto")};
+  left: ${({ direction }) => (direction === "right" ? "4px" : "auto")};
   width: 11px;
   height: 9px;
   border: solid 1px #999;
   border-radius: 50%;
   background-color: white;
-  transform: ${({direction}) => direction==='left' ? 'rotate(15deg)' : 'rotate(-15deg)'};
+  transform: ${({ direction }) =>
+    direction === "left" ? "rotate(15deg)" : "rotate(-15deg)"};
 `;
 
 export const ThoughtIndicator2 = styled.div<ThoughtndicatorProps>`
   position: absolute;
   top: 11px;
-  right: ${({direction}) => direction==="left" ? '-4px' : 'auto'};
-  left: ${({direction}) => direction==="right" ? '-4px' : 'auto'};
+  right: ${({ direction }) => (direction === "left" ? "-4px" : "auto")};
+  left: ${({ direction }) => (direction === "right" ? "-4px" : "auto")};
   width: 7px;
   height: 5px;
   border: solid 1px #999;
   border-radius: 50%;
   background-color: white;
-  transform: ${({direction}) => direction==='left' ? 'rotate(-10deg)' : 'rotate(10deg)'};
+  transform: ${({ direction }) =>
+    direction === "left" ? "rotate(-10deg)" : "rotate(10deg)"};
 `;

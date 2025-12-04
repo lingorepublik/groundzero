@@ -16,7 +16,7 @@ type Props = {
 
 export default function Sentence({ sentenceUnit }: Props) {
   const [selectedWordIndex, setSelectedWordIndex] = useState<number | null>(
-    null
+    null,
   );
   const [isSentenceSelected, setIsSentenceSelected] = useState(false);
 

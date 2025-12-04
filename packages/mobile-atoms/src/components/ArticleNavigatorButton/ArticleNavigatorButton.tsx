@@ -3,7 +3,7 @@ import {
   NavigatorButton,
   Content,
   Container,
-  Star
+  Star,
 } from "./ArticleNavigatorButton.styles";
 import { ArticleNavigatorButtonProgress } from "../ArticleNavigatorButtonProgress";
 import { StarIcon } from "../svg-icons";
@@ -12,7 +12,7 @@ const getColors = (
   isStarred: boolean,
   isDisabled: boolean,
   isActive: boolean,
-  progress: number
+  progress: number,
 ): { background: string; wave: string; text: string } => {
   const colors = {
     background: "#c7c7c7",
@@ -63,7 +63,7 @@ export default function ArticleNavigatorButton({
     isStarred,
     isDisabled,
     isActive,
-    progress
+    progress,
   );
 
   return (

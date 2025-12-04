@@ -1,3 +1,3 @@
 export * from "./catalogRoute";
-export * from "./articleRoute";
 export * from "./articlePageRouter";
+export * from "./storyRouter";

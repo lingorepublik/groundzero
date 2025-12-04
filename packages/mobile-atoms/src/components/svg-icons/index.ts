@@ -1,2 +1,2 @@
-export {default as StarIcon} from "./StarIcon";
-export {default as TrophyIcon} from './TrophyIcon';
+export { default as StarIcon } from "./StarIcon";
+export { default as TrophyIcon } from "./TrophyIcon";

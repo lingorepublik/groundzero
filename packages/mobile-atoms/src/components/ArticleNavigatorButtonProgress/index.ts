@@ -1,1 +1,1 @@
-export {default as ArticleNavigatorButtonProgress} from './ArticleNavigatorButtonProgress';
+export { default as ArticleNavigatorButtonProgress } from "./ArticleNavigatorButtonProgress";

@@ -1,1 +1,1 @@
-export {default as CatalogEntry} from './CatalogEntry';
+export { default as CatalogEntry } from "./CatalogEntry";

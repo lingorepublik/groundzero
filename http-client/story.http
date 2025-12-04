@@ -1,0 +1,33 @@
+### create story
+POST http://localhost:3013/story/
+Content-Type: application/json
+
+{
+    "lang": "de-DE",
+    "title": "nach Berlin",
+    "note": "sein mit perfect",
+    "tier": "free",
+    "seq": 5,
+    "level": "A1"
+}
+
+### create story - invalid request
+POST http://localhost:3013/story/
+Content-Type: application/json
+
+{
+    "lang": "en-US",
+    "title": "sd",
+    "note": "sein mit perfect",
+    "tier": "free",
+    "seq": -0.1,
+    "level": "Beginner"
+}
+
+### get stories by lang
+GET http://localhost:3013/story/lang/de-DE
+Content-Type: application/json
+
+### get stories by lang invalid language
+GET http://localhost:3013/story/lang/invalid-language
+Content-Type: application/json

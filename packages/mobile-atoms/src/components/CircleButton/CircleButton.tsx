@@ -1,7 +1,5 @@
 function CircleButton() {
-  return (
-    <div>CircleButton</div>
-  )
+  return <div>CircleButton</div>;
 }
 
-export default CircleButton
+export default CircleButton;
