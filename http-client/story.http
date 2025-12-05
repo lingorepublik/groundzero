@@ -31,3 +31,16 @@ Content-Type: application/json
 ### get stories by lang invalid language
 GET http://localhost:3013/story/lang/invalid-language
 Content-Type: application/json
+
+### update story
+PUT http://localhost:3013/story/6932f247beadbae643941736
+Content-Type: application/json
+
+{
+    "lang": "de-DE",
+    "title": "nach Berlin",
+    "note": "sein mit perfect",
+    "tier": "free",
+    "seq": 10,
+    "level": "A1"
+}

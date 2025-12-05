@@ -10,4 +10,7 @@ export type Story<L extends Language = Language> = {
   tier: Tier;
   note?: string;
   isDeleted?: boolean;
+  isPublished?: boolean;
 };
+
+export type SavedStory = Story & { _id: string };

@@ -1,14 +1,14 @@
-import { CatalogSideBar } from "../CatalogSideBar";
+import { Stories } from "../Stories";
 import { Container, Footer, Header, Main, WorkBench } from "./App.styles";
 function App() {
   return (
     <Container>
-      <Header>Header</Header>
+      <Header>header</Header>
       <Main>
-        <CatalogSideBar />
+        <Stories />
         <WorkBench />
       </Main>
-      <Footer>Footer</Footer>
+      <Footer>footer</Footer>
     </Container>
   );
 }
