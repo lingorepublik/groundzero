@@ -17,6 +17,7 @@ const storySchema = new Schema<StoryType>(
     tier: { type: String, required: true, enum: TIERS },
     note: { type: String },
     isDeleted: { type: Boolean, default: false },
+    isPublished: { type: Boolean, default: false },
   },
   { timestamps: true },
 );
