@@ -5,11 +5,15 @@ import {
   Container,
   RightColumn,
   StoryContent,
+  UtilityButtons,
 } from "./Stories.styles";
 import { NewStoryButton } from "../NewStoryButton";
 import { IconButton } from "@mui/material";
 import ExpandLessOutlinedIcon from "@mui/icons-material/ExpandLessOutlined";
 import ExpandMoreOutlinedIcon from "@mui/icons-material/ExpandMoreOutlined";
+import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
+import GTranslateOutlinedIcon from "@mui/icons-material/GTranslateOutlined";
+import AutoAwesomeMotionOutlinedIcon from "@mui/icons-material/AutoAwesomeMotionOutlined";
 
 function Stories() {
   const { data, isLoading } = useStories();
@@ -58,6 +62,38 @@ function Stories() {
                     <span>Level: {story.level}</span>
                     <span>Tier: {story.tier}</span>
                     <span>{story.seq}</span>
+                    <UtilityButtons>
+                      <IconButton
+                        onClick={() => undefined}
+                        sx={{
+                          width: 20,
+                          height: 20,
+                          padding: 0,
+                        }}
+                      >
+                        <EditOutlinedIcon />
+                      </IconButton>
+                      <IconButton
+                        onClick={() => undefined}
+                        sx={{
+                          width: 20,
+                          height: 20,
+                          padding: 0,
+                        }}
+                      >
+                        <GTranslateOutlinedIcon />
+                      </IconButton>
+                      <IconButton
+                        onClick={() => undefined}
+                        sx={{
+                          width: 20,
+                          height: 20,
+                          padding: 0,
+                        }}
+                      >
+                        <AutoAwesomeMotionOutlinedIcon />
+                      </IconButton>
+                    </UtilityButtons>
                   </StoryContent>
                   <RightColumn>
                     <IconButton
