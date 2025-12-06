@@ -1,7 +1,7 @@
 import { Schema, model } from "mongoose";
-import { LANGUAGES, Story as StoryType, TIERS } from "shared";
+import { LANGUAGES, Story, TIERS } from "shared";
 
-const storySchema = new Schema<StoryType>(
+const storySchema = new Schema<Story>(
   {
     lang: { type: String, required: true, enum: LANGUAGES },
     title: { type: String, required: true },
@@ -22,4 +22,4 @@ const storySchema = new Schema<StoryType>(
   { timestamps: true },
 );
 
-export const Story = model("Story", storySchema);
+export const StoryModel = model("Story", storySchema);

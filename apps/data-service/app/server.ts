@@ -2,7 +2,12 @@ import express, { Request, Response, ErrorRequestHandler } from "express";
 import createHttpError from "http-errors";
 import cors from "cors";
 import { config } from "dotenv";
-import { catalogRouter, articlePageRouter, storyRouter } from "./routes";
+import {
+  catalogRouter,
+  articlePageRouter,
+  storyRouter,
+  storyLocaleRouter,
+} from "./routes";
 import mongoose from "mongoose";
 config();
 
@@ -13,6 +18,7 @@ const port = process.env.PORT;
 const dbConnectionString = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@data-service.qymhovm.mongodb.net/article-data?appName=data-service`;
 
 app.use("/story", storyRouter);
+app.use("/story-locale", storyLocaleRouter);
 app.use("/catalog", catalogRouter);
 app.use("/article-page", articlePageRouter);
 

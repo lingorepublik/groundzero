@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import { Story } from "../../models/StoryModel";
+import { StoryModel } from "../../models/StoryModel";
 import createHttpError from "http-errors";
 
 export const updateStory = async (
@@ -10,7 +10,7 @@ export const updateStory = async (
   try {
     const { id } = req.params;
 
-    const updatedStory = await Story.findByIdAndUpdate(id, req.body, {
+    const updatedStory = await StoryModel.findByIdAndUpdate(id, req.body, {
       new: true,
       runValidators: true,
     });

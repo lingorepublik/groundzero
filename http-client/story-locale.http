@@ -1,0 +1,12 @@
+### create many story locales
+POST http://localhost:3013/story-locale
+Content-Type: application/json
+
+[
+    {"storyId": "6932f6ff85cf673f3b380af7", "lang": "en-US", "titleTranslation":"english translation aaa"},
+    {"storyId": "6932f6ff85cf673f3b380af7", "lang": "fr-FR", "titleTranslation":"french translation aaa"}
+]
+
+### getStoryLocalesByStoryId
+GET http://localhost:3013/story-locale/6932f247beadbae643941736
+Content-Type: application/json

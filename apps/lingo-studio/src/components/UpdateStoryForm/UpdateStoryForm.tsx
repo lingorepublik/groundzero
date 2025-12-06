@@ -1,5 +1,5 @@
 import { Controller, useForm, SubmitHandler } from "react-hook-form";
-import { useCreateStory, useFetchLang } from "react-query";
+import { useFetchLang, useUpdateStory } from "react-query";
 import {
   TextField,
   Button,
@@ -9,15 +9,15 @@ import {
   ToggleButton,
   FormLabel,
 } from "@mui/material";
-import { LEVELS, TIERS, type Story } from "shared";
+import { LEVELS, SavedStory, TIERS } from "shared";
 
 type Props = {
   setShowForm: React.Dispatch<React.SetStateAction<boolean>>;
-  seq: number;
+  story: SavedStory;
 };
 
-function NewStoryForm({ seq, setShowForm }: Props) {
-  const createStoryMutation = useCreateStory();
+function UpdateStoryForm({ story, setShowForm }: Props) {
+  const updateStoryMutation = useUpdateStory();
   const { data } = useFetchLang();
 
   const {
@@ -25,10 +25,21 @@ function NewStoryForm({ seq, setShowForm }: Props) {
     handleSubmit,
     formState: { errors },
     control,
-  } = useForm<Story>();
+  } = useForm<SavedStory>({
+    defaultValues: {
+      tier: story.tier,
+      level: story.level,
+      title: story.title,
+      note: story.note,
+    },
+  });
 
-  const onSubmit: SubmitHandler<Story> = (data) => {
-    createStoryMutation.mutate(data);
+  const onSubmit: SubmitHandler<SavedStory> = (data) => {
+    updateStoryMutation.mutate({
+      id: data._id,
+      story: { ...data },
+    });
+
     setShowForm(false);
   };
 
@@ -53,9 +64,9 @@ function NewStoryForm({ seq, setShowForm }: Props) {
         padding: "15px",
       }}
     >
-      <input type="hidden" {...register("lang")} value={lang} />
-
-      <input type="hidden" {...register("seq")} value={seq} />
+      <input type="hidden" {...register("_id")} value={story._id} />
+      <input type="hidden" {...register("lang")} value={story.lang} />
+      <input type="hidden" {...register("seq")} value={story.seq} />
 
       <TextField
         label="Title"
@@ -100,7 +111,9 @@ function NewStoryForm({ seq, setShowForm }: Props) {
               size="small"
             >
               {TIERS.map((tier) => (
-                <ToggleButton value={tier}>{tier}</ToggleButton>
+                <ToggleButton key={tier} value={tier}>
+                  {tier}
+                </ToggleButton>
               ))}
             </ToggleButtonGroup>
           )}
@@ -109,7 +122,7 @@ function NewStoryForm({ seq, setShowForm }: Props) {
 
       <Box sx={{ display: "flex", gap: 1 }}>
         <Button type="submit" variant="contained" size="small">
-          Create
+          Update
         </Button>
         <Button size="small" type="reset">
           Reset
@@ -122,4 +135,4 @@ function NewStoryForm({ seq, setShowForm }: Props) {
   );
 }
 
-export default NewStoryForm;
+export default UpdateStoryForm;

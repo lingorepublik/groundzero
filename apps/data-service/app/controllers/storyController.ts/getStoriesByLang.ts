@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import { LANGUAGES } from "shared";
-import { Story } from "../../models/StoryModel";
+import { StoryModel } from "../../models/StoryModel";
 import createHttpError from "http-errors";
 
 export const getStoriesByLang = async (
@@ -15,7 +15,7 @@ export const getStoriesByLang = async (
       throw createHttpError(400, `${lang} is not a valid language`);
     }
 
-    const stories = await Story.find({ lang, isDeleted: false }).sort({
+    const stories = await StoryModel.find({ lang, isDeleted: false }).sort({
       seq: 1,
     });
 
