@@ -1,3 +1,4 @@
+import { ObjectId } from "mongoose";
 import type { Language } from "./language";
 import type { Level } from "./level";
 import type { Tier } from "./tier";
@@ -13,4 +14,4 @@ export type Story<L extends Language = Language> = {
   isPublished?: boolean;
 };
 
-export type SavedStory = Story & { _id: string };
+export type SavedStory = Story & { _id: ObjectId };

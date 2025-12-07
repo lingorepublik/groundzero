@@ -8,7 +8,7 @@ const fetchStoriesByLang = async (): Promise<SavedStory[]> => {
 };
 
 export const useStories = () => {
-  return useQuery({
+  return useQuery<Array<SavedStory>>({
     queryKey: ["stories"],
     queryFn: fetchStoriesByLang,
   });

@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import { Story } from "../../models/StoryModel";
+import { StoryModel } from "../../models/StoryModel";
 
 export const createStory = async (
   req: Request,
@@ -7,7 +7,7 @@ export const createStory = async (
   next: NextFunction,
 ) => {
   try {
-    const story = new Story(req.body);
+    const story = new StoryModel(req.body);
     const savedStory = await story.save();
     res.send(savedStory);
   } catch (e) {

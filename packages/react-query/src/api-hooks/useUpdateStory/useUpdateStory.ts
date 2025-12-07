@@ -1,11 +1,12 @@
 import { SavedStory, Story } from "shared";
 import { useQueryClient, useMutation } from "@tanstack/react-query";
+import { ObjectId } from "mongoose";
 
 const updateStory = async ({
   id,
   story,
 }: {
-  id: string;
+  id: ObjectId;
   story: Story;
 }): Promise<SavedStory> => {
   const response = await fetch(`http://localhost:3013/story/${id}`, {

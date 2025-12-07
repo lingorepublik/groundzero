@@ -4,3 +4,6 @@ export * from "./useCatalog";
 export * from "./useStories";
 export * from "./useCreateStory";
 export * from "./useUpdateStory";
+export * from "./useFetchLang";
+export * from "./useFetchStoryLocales";
+export * from "./useUpdateStoryLocales";
