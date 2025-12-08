@@ -1,5 +1,4 @@
 import { Box, Button, TextField } from "@mui/material";
-import { ObjectId } from "mongoose";
 import { useForm } from "react-hook-form";
 import {
   useFetchLang,
@@ -9,7 +8,7 @@ import {
 import { Language, LANGUAGES, StoryLocale } from "shared";
 
 type Props = {
-  storyId: ObjectId;
+  storyId: string;
   setShowLocalesForm: React.Dispatch<React.SetStateAction<boolean>>;
 };
 

@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { NavLink } from "react-router";
 
 export const Container = styled.div`
   width: 100%;
@@ -14,9 +15,14 @@ export const StoryContent = styled.div`
   flex-direction: column;
 `;
 
+export const StyledNavLink = styled(NavLink)`
+  text-decoration: none;
+  color: #666;
+  padding: 3px;
+`;
+
 export const UtilityButtons = styled.div`
-  /* background-color: aquamarine; */
-  margin: 10px 0;
+  margin-top: 10px;
   display: flex;
   gap: 15px;
 `;

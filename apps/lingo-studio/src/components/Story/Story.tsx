@@ -10,6 +10,7 @@ import {
   StoryContent,
   UtilityButtons,
   RightColumn,
+  StyledNavLink,
 } from "./Story.styles";
 import type { SavedStory } from "shared";
 import { useStories, useUpdateStory } from "react-query";
@@ -62,11 +63,21 @@ function Story({ index }: Props) {
       {!showUpdateForm ? (
         <Container>
           <StoryContent>
-            <span>{story.title}</span>
-            <span>{story.note}</span>
-            <span>Level: {story.level}</span>
-            <span>Tier: {story.tier}</span>
-            <span>{story.seq}</span>
+            <StyledNavLink
+              to={`/studio/chapters/${story._id}`}
+              style={({ isActive }) => ({
+                backgroundColor: isActive ? "aquamarine" : "white",
+              })}
+            >
+              <div>id: {story._id}</div>
+              <div>seq: {story.seq}</div>
+              <div>title: {story.title}</div>
+              <div>note: {story.note}</div>
+              <div>Level: {story.level}</div>
+              <div>Tier: {story.tier}</div>
+              <div>isDeleted: {story.isDeleted ? "true" : "false"}</div>
+              <div>isPublished: {story.isPublished ? "true" : "false"}</div>
+            </StyledNavLink>
             {!showLocalesForm && <StoryLocales storyId={story._id} />}
             {showLocalesForm ? (
               <StoryLocaleForm

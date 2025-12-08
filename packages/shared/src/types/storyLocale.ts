@@ -2,9 +2,9 @@ import { ObjectId } from "mongoose";
 import { Language } from "./language";
 
 export type StoryLocale = {
-  storyId: ObjectId;
+  storyId: ObjectId | string;
   lang: Language;
   titleTranslation: string;
 };
 
-export type SavedStoryLocale = StoryLocale & { _id: ObjectId };
+export type SavedStoryLocale = StoryLocale & { _id: string };

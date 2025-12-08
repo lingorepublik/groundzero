@@ -7,3 +7,5 @@ export * from "./Story";
 export * from "./NewStoryButton";
 export * from "./StoryLocaleForm";
 export * from "./StoryLocales";
+export * from "./Chapters";
+export * from "./Chapter";

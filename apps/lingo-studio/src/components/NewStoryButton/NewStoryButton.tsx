@@ -8,7 +8,11 @@ type Props = {
   bottomSeparator?: boolean;
 };
 
-function NewStory({ seq, topSeparator = true, bottomSeparator = true }: Props) {
+function NewStoryButton({
+  seq,
+  topSeparator = true,
+  bottomSeparator = true,
+}: Props) {
   const [showForm, setShowForm] = useState(false);
 
   const handleClick = () => {
@@ -25,4 +29,4 @@ function NewStory({ seq, topSeparator = true, bottomSeparator = true }: Props) {
   );
 }
 
-export default NewStory;
+export default NewStoryButton;

@@ -7,6 +7,8 @@ import {
   articlePageRouter,
   storyRouter,
   storyLocaleRouter,
+  chapterRouter,
+  chapterLocaleRouter,
 } from "./routes";
 import mongoose from "mongoose";
 config();
@@ -21,6 +23,8 @@ app.use("/story", storyRouter);
 app.use("/story-locale", storyLocaleRouter);
 app.use("/catalog", catalogRouter);
 app.use("/article-page", articlePageRouter);
+app.use("/chapter", chapterRouter);
+app.use("/chapter-locale", chapterLocaleRouter);
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 app.use((req: Request, res: Response) => {

@@ -7,3 +7,8 @@ export * from "./useUpdateStory";
 export * from "./useFetchLang";
 export * from "./useFetchStoryLocales";
 export * from "./useUpdateStoryLocales";
+export * from "./useFetchChapters";
+export * from "./useUpdateChapter";
+export * from "./useCreateChapter";
+export * from "./useFetchChapterLocales";
+export * from "./useUpdateChapterLocales";

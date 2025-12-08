@@ -124,9 +124,6 @@ function UpdateStoryForm({ story, setShowForm }: Props) {
         <Button type="submit" variant="contained" size="small">
           Update
         </Button>
-        <Button size="small" type="reset">
-          Reset
-        </Button>
         <Button color="error" size="small" onClick={() => setShowForm(false)}>
           Close
         </Button>

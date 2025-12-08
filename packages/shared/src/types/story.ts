@@ -14,4 +14,4 @@ export type Story<L extends Language = Language> = {
   isPublished?: boolean;
 };
 
-export type SavedStory = Story & { _id: ObjectId };
+export type SavedStory = Story & { _id: string };

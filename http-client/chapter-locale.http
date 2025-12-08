@@ -1,0 +1,12 @@
+### getChapterLocalesByChapterId
+GET http://localhost:3013/chapter-locale/6932f247beadbae643941736
+Content-Type: application/json
+
+### create many chapter locales
+POST http://localhost:3013/chapter-locale
+Content-Type: application/json
+
+[
+    {"chapterId": "69383890ec0f8b3523b7997f", "lang": "en-US", "titleTranslation":"english translation aaa"},
+    {"chapterId": "69383890ec0f8b3523b7997f", "lang": "fr-FR", "titleTranslation":"french translation aaa"}
+]
