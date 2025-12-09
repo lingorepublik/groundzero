@@ -1,9 +1,8 @@
-import { ObjectId } from "mongoose";
 import { useFetchStoryLocales } from "react-query";
 import { Container } from "./StoryLocales.styles";
 
 type Props = {
-  storyId: ObjectId;
+  storyId: string;
 };
 
 function StoryLocales({ storyId }: Props) {

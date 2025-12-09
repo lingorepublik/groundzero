@@ -1,4 +1,3 @@
-import { ObjectId } from "mongoose";
 import { SavedStoryLocale, StoryLocale } from "shared";
 import { useQueryClient, useMutation } from "@tanstack/react-query";
 
@@ -19,7 +18,7 @@ const updateStoryLocales = async (
   return data;
 };
 
-export const useUpdateStoryLocales = (storyId: ObjectId) => {
+export const useUpdateStoryLocales = (storyId: string) => {
   const queryClient = useQueryClient();
 
   return useMutation({

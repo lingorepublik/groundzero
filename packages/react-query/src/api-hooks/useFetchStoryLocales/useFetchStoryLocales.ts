@@ -1,5 +1,4 @@
 import { QueryFunction, useQuery } from "@tanstack/react-query";
-import { ObjectId } from "mongoose";
 import { SavedStoryLocale } from "shared";
 
 const fetchStoryLocalesByStoryId: QueryFunction<SavedStoryLocale[]> = async ({
@@ -13,7 +12,7 @@ const fetchStoryLocalesByStoryId: QueryFunction<SavedStoryLocale[]> = async ({
   return data;
 };
 
-export const useFetchStoryLocales = (storyId: ObjectId) => {
+export const useFetchStoryLocales = (storyId: string) => {
   return useQuery<SavedStoryLocale[]>({
     queryKey: ["story-locales", storyId],
     queryFn: fetchStoryLocalesByStoryId,

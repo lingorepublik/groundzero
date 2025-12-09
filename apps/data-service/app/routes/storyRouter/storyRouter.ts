@@ -4,7 +4,7 @@ import {
   getStoriesByLang,
   updateStory,
   validateStory,
-} from "../../controllers/storyController.ts";
+} from "../../controllers/storyController";
 
 const storyRouter = Router();
 

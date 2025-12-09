@@ -8,5 +8,5 @@ Content-Type: application/json
 ]
 
 ### getStoryLocalesByStoryId
-GET http://localhost:3013/story-locale/6932f247beadbae643941736
+GET http://localhost:3013/story-locale/6934a66b1299d755e3045b25
 Content-Type: application/json

@@ -1,0 +1,36 @@
+### create chapter
+POST http://localhost:3013/chapter/
+Content-Type: application/json
+
+{
+    "seq": 5,
+    "title": "Vorbereitung",
+    "storyId": "6934a66b1299d755e3045b25",
+    "tier": "free"
+}
+
+### create invalid chapter
+POST http://localhost:3013/chapter/
+Content-Type: application/json
+
+{
+    "seq": 0,
+    "title": "Vorbereitung",
+    "storyId": "6934a66b1299d755e3045b25",
+    "tier": "free"
+}
+
+### update chapter
+PUT http://localhost:3013/chapter/6936f5ebf7e1d16493dc05a1
+Content-Type: application/json
+
+{
+    "seq": 1,
+    "title": "Vorbereitung sdafsdf",
+    "storyId": "6934a66b1299d755e3045b25",
+    "tier": "free"
+}
+
+### getChaptersByStoryId
+GET http://localhost:3013/chapter/6934a66b1299d755e3045b25
+Content-Type: application/json

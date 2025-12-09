@@ -4,3 +4,5 @@ export * from "./language";
 export * from "./level";
 export * from "./story";
 export * from "./storyLocale";
+export * from "./chapter";
+export * from "./chapterLocale";
