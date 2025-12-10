@@ -9,3 +9,4 @@ export * from "./StoryLocaleForm";
 export * from "./StoryLocales";
 export * from "./Chapters";
 export * from "./Chapter";
+export * from "./Blocks";

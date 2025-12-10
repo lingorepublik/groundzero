@@ -1,5 +1,4 @@
 import styled from "@emotion/styled";
-import { NavLink } from "react-router";
 
 export const Container = styled.div`
   display: flex;
@@ -20,10 +19,4 @@ export const UtilityButtons = styled.div`
   margin-top: 10px;
   display: flex;
   gap: 15px;
-`;
-
-export const StyledNavLink = styled(NavLink)`
-  text-decoration: none;
-  color: #666;
-  padding: 3px;
 `;

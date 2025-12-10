@@ -3,7 +3,6 @@ import ExpandLessOutlinedIcon from "@mui/icons-material/ExpandLessOutlined";
 import ExpandMoreOutlinedIcon from "@mui/icons-material/ExpandMoreOutlined";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import GTranslateOutlinedIcon from "@mui/icons-material/GTranslateOutlined";
-import AutoAwesomeMotionOutlinedIcon from "@mui/icons-material/AutoAwesomeMotionOutlined";
 
 import {
   Container,
@@ -111,16 +110,6 @@ function Story({ index }: Props) {
                   }}
                 >
                   <GTranslateOutlinedIcon />
-                </IconButton>
-                <IconButton
-                  onClick={() => undefined}
-                  sx={{
-                    width: 20,
-                    height: 20,
-                    padding: 0,
-                  }}
-                >
-                  <AutoAwesomeMotionOutlinedIcon />
                 </IconButton>
               </UtilityButtons>
             )}

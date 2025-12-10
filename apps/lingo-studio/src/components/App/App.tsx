@@ -2,6 +2,7 @@ import { Outlet, Route, Routes } from "react-router";
 import { Stories } from "../Stories";
 import { Container, Footer, Header, Main } from "./App.styles";
 import { Chapters } from "../Chapters";
+import { Blocks } from "../Blocks";
 function App() {
   return (
     <Container>
@@ -17,7 +18,17 @@ function App() {
               </>
             }
           >
-            <Route path="chapters/:storyId" element={<Chapters />} />
+            <Route
+              path="chapters/:storyId"
+              element={
+                <>
+                  <Chapters />
+                  <Outlet />
+                </>
+              }
+            >
+              <Route path="blocks/:chapterId" element={<Blocks />} />
+            </Route>
           </Route>
         </Routes>
       </Main>

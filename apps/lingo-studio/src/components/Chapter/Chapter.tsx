@@ -3,7 +3,6 @@ import {
   ChapterContent,
   Container,
   RightColumn,
-  StyledNavLink,
   UtilityButtons,
 } from "./Chapter.styles";
 import { IconButton } from "@mui/material";
@@ -15,6 +14,7 @@ import { useState } from "react";
 import { UpdateChapterForm } from "../UpdateChapterForm";
 import { ChapterLocaleForm } from "../ChapterLocaleForm";
 import { ChapterLocales } from "../ChapterLocales";
+import {NavLink} from "react-router";
 
 type Props = {
   index: number;
@@ -57,11 +57,8 @@ function Chapter({ index, storyId }: Props) {
       {!showUpdateForm ? (
         <Container>
           <ChapterContent>
-            <StyledNavLink
+            <NavLink
               to={`/studio/chapters/${chapter.storyId}/blocks/${chapter._id}`}
-              style={({ isActive }) => ({
-                backgroundColor: isActive ? "aquamarine" : "white",
-              })}
             >
               <div>id: {chapter._id}</div>
               <div>seq: {chapter.seq}</div>
@@ -69,7 +66,7 @@ function Chapter({ index, storyId }: Props) {
               <div>title: {chapter.title}</div>
               <div>isDeleted: {chapter.isDeleted ? "true" : "false"}</div>
               <div>isPublished: {chapter.isPublished ? "true" : "false"}</div>
-            </StyledNavLink>
+            </NavLink>
             {!showLocalesForm && <ChapterLocales chapterId={chapter._id} />}
             {showLocalesForm ? (
               <ChapterLocaleForm
