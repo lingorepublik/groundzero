@@ -14,7 +14,7 @@ import { useState } from "react";
 import { UpdateChapterForm } from "../UpdateChapterForm";
 import { ChapterLocaleForm } from "../ChapterLocaleForm";
 import { ChapterLocales } from "../ChapterLocales";
-import {NavLink} from "react-router";
+import { NavLink } from "react-router";
 
 type Props = {
   index: number;

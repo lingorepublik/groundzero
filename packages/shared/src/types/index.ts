@@ -6,3 +6,5 @@ export * from "./story";
 export * from "./storyLocale";
 export * from "./chapter";
 export * from "./chapterLocale";
+export * from "./sentence";
+export * from "./block";
