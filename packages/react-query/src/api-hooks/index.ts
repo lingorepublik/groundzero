@@ -12,3 +12,4 @@ export * from "./useUpdateChapter";
 export * from "./useCreateChapter";
 export * from "./useFetchChapterLocales";
 export * from "./useUpdateChapterLocales";
+export * from "./useFetchBlocks";

@@ -9,6 +9,7 @@ Content-Type: application/json
 {
   "chapterId": "69383890ec0f8b3523b7997f",
   "seq": 1,
+  "contentType": "ILLUSTRATION",
   "content": "illustrationUrl.jpg"
 }
 
@@ -19,6 +20,7 @@ Content-Type: application/json
 {
   "chapterId": "69383890ec0f8b3523b7997f",
   "seq": 1,
+  "contentType": "SENTENCE",
   "content": [
     {
       "word": "I"
@@ -32,12 +34,49 @@ Content-Type: application/json
       "refIndex": 1
     },
     {"word": "um", "refIndex": 1 },
-    {"word":  ",", "punctuationMark": true }
+    {"word":  ",", "punctuationMark": true },
+    {"word":  "while"},
+    {"word":  "Ich"},
+    {"word":  "muss", "lemma":  "mussen"},
+    {"word":  "zum"},
+    {"word":  "Fitnessstudio"},
+    {"word":  "gehen"}
   ],
   "character": "Emma",
   "avatarUrl": "avatarUrl.jpg",
   "avatarExpression": "SMILE",
   "balloonDirection": "LEFT",
-  "balloonType": "TALK",
+  "balloonType": "THINK",
   "audio": "audio.mp3"
+}
+
+### create block only with a sentence
+POST http://localhost:3013/block/
+Content-Type: application/json
+
+{
+  "chapterId": "69383890ec0f8b3523b7997f",
+  "seq": 1,
+  "contentType": "SENTENCE",
+  "content": [
+    {
+      "word": "I"
+    },
+    {
+      "word": "ziehe",
+      "lemma": "sich umziehen"
+    },
+    {
+      "word": "mich",
+      "refIndex": 1
+    },
+    {"word": "um", "refIndex": 1 },
+    {"word":  ",", "punctuationMark": true },
+    {"word":  "while"},
+    {"word":  "Ich"},
+    {"word":  "muss", "lemma":  "mussen"},
+    {"word":  "zum"},
+    {"word":  "Fitnessstudio"},
+    {"word":  "gehen"}
+  ]
 }
