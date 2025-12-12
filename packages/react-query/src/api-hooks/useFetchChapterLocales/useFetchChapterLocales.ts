@@ -7,9 +7,7 @@ const fetchChapterLocalesByChapterId: QueryFunction<
   const [, id] = queryKey;
 
   const response = await fetch(`http://localhost:3013/chapter-locale/${id}`);
-  const data = await response.json();
-
-  return data;
+  return await response.json();
 };
 
 export const useFetchChapterLocales = (chapterId: string) => {

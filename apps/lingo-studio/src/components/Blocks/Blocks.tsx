@@ -16,6 +16,8 @@ import ExpandLessOutlinedIcon from "@mui/icons-material/ExpandLessOutlined";
 import ExpandMoreOutlinedIcon from "@mui/icons-material/ExpandMoreOutlined";
 import { useState } from "react";
 import { UpdateBlockForm } from "../UpdateBlockForm";
+import { BlockLocales } from "../BlockLocales";
+import { BlockLocaleForm } from "../BlockLocaleForm";
 
 function Blocks() {
   const [updateBlockIndex, setUpdateBlockIndex] = useState<number | null>(null);
@@ -54,13 +56,22 @@ function Blocks() {
                 <BlockWrapper>
                   <BlockContent>
                     <div>{block.seq}</div>
+                    <div>{block._id}</div>
                     {block.contentType === "SENTENCE" ? (
-                      <Sentence block={block} />
+                      <>
+                        <Sentence block={block} />
+                        {localeBlockIndex !== index && (
+                          <BlockLocales blockId={block._id} />
+                        )}
+                      </>
                     ) : (
                       <div>ILLUSTRATION</div>
                     )}
                     {localeBlockIndex === index ? (
-                      <div>locale form</div>
+                      <BlockLocaleForm
+                        blockId={block._id}
+                        setUpdateBlockIndex={setLocaleBlockIndex}
+                      />
                     ) : (
                       <UtilityButtons>
                         <IconButton
@@ -75,16 +86,18 @@ function Blocks() {
                         >
                           <EditOutlinedIcon />
                         </IconButton>
-                        <IconButton
-                          onClick={() => setLocaleBlockIndex(index)}
-                          sx={{
-                            width: 20,
-                            height: 20,
-                            padding: 0,
-                          }}
-                        >
-                          <GTranslateOutlinedIcon />
-                        </IconButton>
+                        {block.contentType === "SENTENCE" && (
+                          <IconButton
+                            onClick={() => setLocaleBlockIndex(index)}
+                            sx={{
+                              width: 20,
+                              height: 20,
+                              padding: 0,
+                            }}
+                          >
+                            <GTranslateOutlinedIcon />
+                          </IconButton>
+                        )}
                       </UtilityButtons>
                     )}
                   </BlockContent>
