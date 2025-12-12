@@ -8,3 +8,4 @@ export * from "./chapter";
 export * from "./chapterLocale";
 export * from "./sentence";
 export * from "./block";
+export * from "./blockLocale.ts";

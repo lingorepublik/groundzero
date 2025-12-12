@@ -10,6 +10,7 @@ import {
   chapterRouter,
   chapterLocaleRouter,
   blockRouter,
+  blockLocaleRouter,
 } from "./routes";
 import mongoose from "mongoose";
 config();
@@ -27,6 +28,7 @@ app.use("/article-page", articlePageRouter);
 app.use("/chapter", chapterRouter);
 app.use("/chapter-locale", chapterLocaleRouter);
 app.use("/block", blockRouter);
+app.use("/block-locale", blockLocaleRouter);
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 app.use((req: Request, res: Response) => {

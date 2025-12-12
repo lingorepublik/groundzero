@@ -19,6 +19,7 @@ import { UpdateBlockForm } from "../UpdateBlockForm";
 
 function Blocks() {
   const [updateBlockIndex, setUpdateBlockIndex] = useState<number | null>(null);
+  const [localeBlockIndex, setLocaleBlockIndex] = useState<number | null>(null);
   const { chapterId } = useParams();
   const { data: blocks, isLoading } = useFetchBlocks(chapterId);
   const updateBlockMutation = useUpdateBlock();
@@ -58,30 +59,34 @@ function Blocks() {
                     ) : (
                       <div>ILLUSTRATION</div>
                     )}
-                    <UtilityButtons>
-                      <IconButton
-                        onClick={() => {
-                          setUpdateBlockIndex(index);
-                        }}
-                        sx={{
-                          width: 20,
-                          height: 20,
-                          padding: 0,
-                        }}
-                      >
-                        <EditOutlinedIcon />
-                      </IconButton>
-                      <IconButton
-                        onClick={() => undefined}
-                        sx={{
-                          width: 20,
-                          height: 20,
-                          padding: 0,
-                        }}
-                      >
-                        <GTranslateOutlinedIcon />
-                      </IconButton>
-                    </UtilityButtons>
+                    {localeBlockIndex === index ? (
+                      <div>locale form</div>
+                    ) : (
+                      <UtilityButtons>
+                        <IconButton
+                          onClick={() => {
+                            setUpdateBlockIndex(index);
+                          }}
+                          sx={{
+                            width: 20,
+                            height: 20,
+                            padding: 0,
+                          }}
+                        >
+                          <EditOutlinedIcon />
+                        </IconButton>
+                        <IconButton
+                          onClick={() => setLocaleBlockIndex(index)}
+                          sx={{
+                            width: 20,
+                            height: 20,
+                            padding: 0,
+                          }}
+                        >
+                          <GTranslateOutlinedIcon />
+                        </IconButton>
+                      </UtilityButtons>
+                    )}
                   </BlockContent>
                   <RightColumn>
                     <IconButton

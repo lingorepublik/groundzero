@@ -1,5 +1,4 @@
 import { Schema, model } from "mongoose";
-import { storyLocaleRouter } from "../routes";
 import { LANGUAGES } from "shared";
 
 const chapterLocaleSchema = new Schema({
