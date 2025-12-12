@@ -11,15 +11,32 @@ import React, { useState } from "react";
 import { Sentence, SentenceSection } from "shared";
 
 type Props = {
-  sentence: Sentence;
   setSentence: React.Dispatch<React.SetStateAction<Sentence>>;
+  index: number;
+  setSentenceSectionEditIndex?: React.Dispatch<
+    React.SetStateAction<number | null>
+  >;
+  setNewSentenceSectionIndex?: React.Dispatch<
+    React.SetStateAction<number | null>
+  >;
+  sentenceSection?: SentenceSection;
 };
 
-function SentenceForm({ sentence, setSentence }: Props) {
-  const [word, setWord] = useState("");
-  const [lemma, setLemma] = useState("");
-  const [refIndex, setRefIndex] = useState<number | null>(null);
-  const [isPunctuationMark, setIsPunctuationMark] = useState<boolean>(false);
+function SentenceForm({
+  sentenceSection,
+  setSentence,
+  setSentenceSectionEditIndex,
+  setNewSentenceSectionIndex,
+  index,
+}: Props) {
+  const [word, setWord] = useState(sentenceSection?.word || "");
+  const [lemma, setLemma] = useState(sentenceSection?.lemma || "");
+  const [refIndex, setRefIndex] = useState<number | null>(
+    sentenceSection?.refIndex || null,
+  );
+  const [isPunctuationMark, setIsPunctuationMark] = useState<boolean>(
+    !!sentenceSection?.punctuationMark,
+  );
 
   const handleAppend = () => {
     if (!word) {
@@ -40,15 +57,29 @@ function SentenceForm({ sentence, setSentence }: Props) {
       newSentenceSection.punctuationMark = true;
     }
 
-    setSentence((prevState) => prevState.concat(newSentenceSection));
+    if (setSentenceSectionEditIndex) {
+      setSentence((prevState) => {
+        const arr = [...prevState];
+        arr[index] = newSentenceSection;
+        return arr;
+      });
+
+      setSentenceSectionEditIndex(null);
+    }
+
+    if (setNewSentenceSectionIndex) {
+      setSentence((prevState) => {
+        const arr = [...prevState];
+        arr.splice(index, 0, newSentenceSection);
+        return arr;
+      });
+
+      setNewSentenceSectionIndex(null);
+    }
   };
 
   return (
     <Container>
-      {sentence.map((sentenceSection) => (
-        <div>{JSON.stringify(sentenceSection)}</div>
-      ))}
-
       <Box sx={{ display: "flex", gap: 1 }}>
         <TextField
           label="Word"
