@@ -18,7 +18,8 @@ import {
   ContentType,
   Sentence,
 } from "shared";
-import { SentenceForm } from "../SentenceForm";
+import { useCreateBlock } from "react-query";
+import { SentenceSectionView } from "../SentenceSectionView";
 
 type Props = {
   chapterId: string;
@@ -28,14 +29,10 @@ type Props = {
 
 function NewBlockForm({ chapterId, seq, setShowForm }: Props) {
   const [sentence, setSentence] = useState<Sentence>([]);
-  const [sentenceSectionEditIndex, setSentenceSectionEditIndex] = useState<
-    number | null
-  >(null);
-  const [newSentenceSectionIndex, setNewSentenceSectionIndex] = useState<
-    number | null
-  >(null);
   const [showSentenceForm, setShowSentenceForm] = useState(false);
   const [showIllustrationForm, setShowIllustrationForm] = useState(false);
+
+  const createBlockMutation = useCreateBlock(chapterId);
 
   const { register, handleSubmit, control } = useForm<Block>();
 
@@ -44,7 +41,19 @@ function NewBlockForm({ chapterId, seq, setShowForm }: Props) {
       data.content = sentence;
     }
 
-    console.log(data);
+    const cleanedData = Object.fromEntries(
+      Object.entries(data).filter(([_, v]) => v !== undefined && v !== ""),
+    );
+
+    if (
+      !cleanedData.content ||
+      (Array.isArray(cleanedData.content) && cleanedData.content.length === 0)
+    ) {
+      return;
+    }
+
+    createBlockMutation?.mutate(cleanedData as Block);
+    setShowForm(false);
   };
 
   return (
@@ -110,134 +119,7 @@ function NewBlockForm({ chapterId, seq, setShowForm }: Props) {
             gap: 1,
           }}
         >
-          {sentence.length === 0 && (
-            <SentenceForm
-              setSentence={setSentence}
-              setNewSentenceSectionIndex={setNewSentenceSectionIndex}
-              index={0}
-            />
-          )}
-          {sentence.map((sentenceSection, index) => (
-            <>
-              {index === sentenceSectionEditIndex ? (
-                <SentenceForm
-                  sentenceSection={sentenceSection}
-                  setSentence={setSentence}
-                  setSentenceSectionEditIndex={setSentenceSectionEditIndex}
-                  index={index}
-                />
-              ) : (
-                <>
-                  {index === 0 &&
-                    (newSentenceSectionIndex !== 0 ? (
-                      <button
-                        type="button"
-                        onClick={() => {
-                          setSentenceSectionEditIndex(null);
-                          setNewSentenceSectionIndex(0);
-                        }}
-                      >
-                        add new
-                      </button>
-                    ) : (
-                      <SentenceForm
-                        setSentence={setSentence}
-                        setNewSentenceSectionIndex={setNewSentenceSectionIndex}
-                        index={0}
-                      />
-                    ))}
-                  <div style={{ backgroundColor: "aqua" }}>
-                    <div>index: {index}</div>
-                    <div>{sentenceSection.word}</div>
-                    {sentenceSection.lemma && (
-                      <div>lemma: {sentenceSection.lemma}</div>
-                    )}
-                    {sentenceSection.refIndex && (
-                      <div>refIndex: {sentenceSection.refIndex}</div>
-                    )}
-                    {sentenceSection.punctuationMark && (
-                      <div>punctuationMark: true</div>
-                    )}
-                    <div style={{ display: "flex", gap: "10px" }}>
-                      <button
-                        onClick={() => {
-                          setNewSentenceSectionIndex(null);
-                          setSentenceSectionEditIndex(index);
-                        }}
-                        type="button"
-                      >
-                        edit
-                      </button>
-
-                      {index > 0 && (
-                        <button
-                          onClick={() => {
-                            setSentence((prevState) => {
-                              const arr = [...prevState];
-                              [arr[index], arr[index - 1]] = [
-                                arr[index - 1],
-                                arr[index],
-                              ];
-                              return arr;
-                            });
-                          }}
-                          type="button"
-                        >
-                          up
-                        </button>
-                      )}
-
-                      {index < sentence.length - 1 && (
-                        <button
-                          onClick={() => {
-                            setSentence((prevState) => {
-                              const arr = [...prevState];
-                              [arr[index], arr[index + 1]] = [
-                                arr[index + 1],
-                                arr[index],
-                              ];
-                              return arr;
-                            });
-                          }}
-                          type="button"
-                        >
-                          down
-                        </button>
-                      )}
-
-                      <button
-                        onClick={() => {
-                          setSentence((prevState) =>
-                            prevState.filter((_, i) => i !== index),
-                          );
-                        }}
-                        type="button"
-                      >
-                        delete
-                      </button>
-                    </div>
-                  </div>
-                  {newSentenceSectionIndex !== index + 1 ? (
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setSentenceSectionEditIndex(null);
-                        setNewSentenceSectionIndex(index + 1);
-                      }}
-                    >
-                      add new
-                    </button>
-                  ) : (
-                    <SentenceForm
-                      setSentence={setSentence}
-                      setNewSentenceSectionIndex={setNewSentenceSectionIndex}
-                      index={index + 1}
-                    />
-                  )}
-                </>
-              )}
-            </>
-          ))}
+          <SentenceSectionView sentence={sentence} setSentence={setSentence} />
 
           <TextField label="Audio" {...register("audio")} size="small" />
           <TextField

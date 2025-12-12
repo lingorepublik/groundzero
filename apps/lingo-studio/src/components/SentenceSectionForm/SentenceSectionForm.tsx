@@ -5,29 +5,32 @@ import {
   FormControlLabel,
   IconButton,
 } from "@mui/material";
-import { Container } from "./SentenceForm.styles.ts";
+import { Container } from "./SentenceSectionForm.styles.ts";
 import SaveIcon from "@mui/icons-material/Save";
+import CloseIcon from "@mui/icons-material/Close";
 import React, { useState } from "react";
 import { Sentence, SentenceSection } from "shared";
 
 type Props = {
   setSentence: React.Dispatch<React.SetStateAction<Sentence>>;
   index: number;
-  setSentenceSectionEditIndex?: React.Dispatch<
+  setUpdateSentenceSectionIndex?: React.Dispatch<
     React.SetStateAction<number | null>
   >;
   setNewSentenceSectionIndex?: React.Dispatch<
     React.SetStateAction<number | null>
   >;
   sentenceSection?: SentenceSection;
+  isCloseButtonDisabled?: boolean;
 };
 
-function SentenceForm({
+function SentenceSectionForm({
   sentenceSection,
   setSentence,
-  setSentenceSectionEditIndex,
+  setUpdateSentenceSectionIndex,
   setNewSentenceSectionIndex,
   index,
+  isCloseButtonDisabled,
 }: Props) {
   const [word, setWord] = useState(sentenceSection?.word || "");
   const [lemma, setLemma] = useState(sentenceSection?.lemma || "");
@@ -37,6 +40,11 @@ function SentenceForm({
   const [isPunctuationMark, setIsPunctuationMark] = useState<boolean>(
     !!sentenceSection?.punctuationMark,
   );
+
+  const handleClose = () => {
+    setNewSentenceSectionIndex?.(null);
+    setUpdateSentenceSectionIndex?.(null);
+  };
 
   const handleAppend = () => {
     if (!word) {
@@ -57,14 +65,14 @@ function SentenceForm({
       newSentenceSection.punctuationMark = true;
     }
 
-    if (setSentenceSectionEditIndex) {
+    if (setUpdateSentenceSectionIndex) {
       setSentence((prevState) => {
         const arr = [...prevState];
         arr[index] = newSentenceSection;
         return arr;
       });
 
-      setSentenceSectionEditIndex(null);
+      setUpdateSentenceSectionIndex(null);
     }
 
     if (setNewSentenceSectionIndex) {
@@ -86,12 +94,14 @@ function SentenceForm({
           size="small"
           value={word}
           onChange={(e) => setWord(e.target.value)}
+          sx={{ backgroundColor: "white" }}
         />
         <TextField
           label="Lemma"
           size="small"
           value={lemma}
           onChange={(e) => setLemma(e.target.value)}
+          sx={{ backgroundColor: "white" }}
         />
       </Box>
       <Box
@@ -110,7 +120,7 @@ function SentenceForm({
           onChange={(e) => {
             setRefIndex(+e.target.value);
           }}
-          sx={{ width: 100 }}
+          sx={{ width: 100, backgroundColor: "white" }}
         />
         <FormControlLabel
           control={
@@ -119,9 +129,10 @@ function SentenceForm({
               onChange={(e) => {
                 setIsPunctuationMark(e.target.checked);
               }}
+              sx={{ backgroundColor: "white" }}
             />
           }
-          label="Punctuation Mark"
+          label="Punct. Mk"
         />
         <IconButton
           onClick={handleAppend}
@@ -133,9 +144,21 @@ function SentenceForm({
         >
           <SaveIcon color="primary" />
         </IconButton>
+
+        <IconButton
+          onClick={handleClose}
+          sx={{
+            width: 20,
+            height: 20,
+            padding: 0,
+          }}
+          disabled={isCloseButtonDisabled}
+        >
+          <CloseIcon color={isCloseButtonDisabled ? "disabled" : "error"} />
+        </IconButton>
       </Box>
     </Container>
   );
 }
 
-export default SentenceForm;
+export default SentenceSectionForm;
