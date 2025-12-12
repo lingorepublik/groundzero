@@ -80,3 +80,11 @@ Content-Type: application/json
     {"word":  "gehen"}
   ]
 }
+
+### update block by id
+PUT http://localhost:3013/block/693aa8f6f60fce35bdcc508b
+Content-Type: application/json
+
+{
+  "seq": 0.001
+}
