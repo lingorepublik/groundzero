@@ -15,6 +15,8 @@ type Props = {
 function ChapterLocaleForm({ chapterId, setShowLocalesForm }: Props) {
   const { data } = useFetchChapterLocales(chapterId);
   const { data: langData } = useFetchLang();
+  console.log(langData);
+
   const updateChapterLocalesMutation = useUpdateChapterLocales(chapterId);
 
   const localesLangs =

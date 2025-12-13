@@ -18,19 +18,18 @@ import { useState } from "react";
 import { UpdateChapterForm } from "../UpdateChapterForm";
 import { ChapterLocaleForm } from "../ChapterLocaleForm";
 import { ChapterLocales } from "../ChapterLocales";
-import { useNavigate } from "react-router";
+import { useNavigate, useParams } from "react-router";
 
 type Props = {
   index: number;
-  selectedId: string;
-  setSelectedId: React.Dispatch<React.SetStateAction<string>>;
   storyId?: string;
 };
 
-function Chapter({ index, storyId, selectedId, setSelectedId }: Props) {
+function Chapter({ index, storyId }: Props) {
   const { data } = useFetchChapters(storyId);
   const updateChapterMutation = useUpdateChapter(storyId);
   const navigate = useNavigate();
+  const { chapterId } = useParams();
 
   const [showUpdateForm, setShowUpdateForm] = useState(false);
   const [showLocalesForm, setShowLocalesForm] = useState(false);
@@ -42,7 +41,6 @@ function Chapter({ index, storyId, selectedId, setSelectedId }: Props) {
   const chapter = data[index];
 
   const handleNavigation = () => {
-    setSelectedId(chapter._id);
     navigate(`/stories/chapters/${chapter.storyId}/blocks/${chapter._id}`);
   };
 
@@ -67,7 +65,7 @@ function Chapter({ index, storyId, selectedId, setSelectedId }: Props) {
   return (
     <>
       {!showUpdateForm ? (
-        <Container isSelected={selectedId === chapter._id}>
+        <Container isSelected={chapterId === chapter._id}>
           <ChapterContent>
             <NavDiv onClick={handleNavigation}>
               <Tier>{chapter.tier}</Tier>

@@ -1,9 +1,21 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useFetchBlockLocales, useFetchLang } from "react-query";
-import { Language, LANGUAGES } from "shared";
+import { BlockLocale, Language, LANGUAGES } from "shared";
 import { Box, Button, TextField } from "@mui/material";
 import { useForm } from "react-hook-form";
 import { useUpdateBlockLocales } from "react-query/src/api-hooks/useUpdateBlockLocales/useUpdateBlockLocales.ts";
+
+type RefinedLocales = {
+  translation: string;
+  insight: string;
+};
+
+type FormValues = {
+  [key in Language]?: {
+    translation: string;
+    insight: string;
+  };
+};
 
 type Props = {
   blockId: string;
@@ -11,37 +23,52 @@ type Props = {
 };
 
 function BlockLocaleForm({ blockId, setUpdateBlockIndex }: Props) {
-  const { data } = useFetchBlockLocales(blockId);
   const { data: langData } = useFetchLang();
+  const { data } = useFetchBlockLocales(blockId);
   const updateBlockLocalesMutation = useUpdateBlockLocales(blockId);
 
   const localesLangs =
     langData && LANGUAGES.filter((language) => language !== langData.lang);
 
-  const defaultValues = {};
-
-  if (data) {
-    localesLangs?.forEach((lang) => {
-      const locale = data?.filter((l) => l.lang === lang)[0];
-
-      defaultValues[locale?.lang] = {
-        translation: locale?.sentenceTranslation || "",
-        insight: locale?.insight || "",
-      };
-    });
-  }
-
-  const { register, handleSubmit } = useForm({
-    defaultValues: defaultValues,
+  const { register, handleSubmit, reset } = useForm<FormValues>({
+    defaultValues: {},
+    shouldUnregister: true,
   });
 
-  const onSubmit = (data: any) => {
-    const formattedData = Object.entries(data).map(([key, value]) => ({
-      blockId: blockId,
-      lang: key as Language,
-      sentenceTranslation: value.translation,
-      insight: value.insight,
-    }));
+  useEffect(() => {
+    if (langData && data) {
+      const defaultValues: Partial<Record<Language, RefinedLocales>> = {};
+
+      localesLangs?.forEach((lang) => {
+        const locale = data?.filter((l) => l.lang === lang)[0];
+
+        defaultValues[locale?.lang] = {
+          translation: locale?.sentenceTranslation || "",
+          insight: locale?.insight || "",
+        };
+      });
+
+      reset(defaultValues);
+    }
+  }, [langData, data]);
+
+  const onSubmit = (data: Record<string, RefinedLocales>) => {
+    console.log(data);
+
+    const formattedData = Object.entries(data)
+      .map(([key, value]) => {
+        if (value.translation || value.insight) {
+          return {
+            blockId: blockId,
+            lang: key as Language,
+            sentenceTranslation: value.translation,
+            insight: value.insight,
+          };
+        }
+      })
+      .filter((l) => l !== undefined);
+
+    console.log(formattedData);
 
     updateBlockLocalesMutation.mutate(formattedData);
     setUpdateBlockIndex(null);
