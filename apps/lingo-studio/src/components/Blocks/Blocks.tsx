@@ -39,7 +39,7 @@ function Blocks() {
     <Container>
       <div>BLOCKS</div>
       {blocks && blocks.length > 0 ? (
-        <>
+        <div>
           {blocks?.map((block, index) => (
             <>
               {index === 0 && (
@@ -179,7 +179,7 @@ function Blocks() {
               />
             </>
           ))}
-        </>
+        </div>
       ) : (
         <NewBlockButton
           seq={1}

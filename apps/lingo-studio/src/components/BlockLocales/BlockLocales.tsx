@@ -12,6 +12,8 @@ function BlockLocales({ blockId }: Props) {
     return null;
   }
 
+  // console.log(data);
+
   return (
     <Container>
       {data.map((locale) => (

@@ -3,10 +3,8 @@ import { ChaptersWrapper, Container } from "./Chapters.styles";
 import { useParams } from "react-router";
 import { NewChapterButton } from "../NewChapterButton";
 import Chapter from "../Chapter/Chapter";
-import { useState } from "react";
 
 function Chapters() {
-  const [selectedId, setSelectedId] = useState("");
   const { storyId } = useParams();
   const { data: chapters, isLoading } = useFetchChapters(storyId);
 
@@ -28,12 +26,7 @@ function Chapters() {
                   topSeparator={false}
                 />
               )}
-              <Chapter
-                index={index}
-                storyId={storyId}
-                selectedId={selectedId}
-                setSelectedId={setSelectedId}
-              />
+              <Chapter index={index} storyId={storyId} />
               <NewChapterButton
                 storyId={storyId}
                 seq={

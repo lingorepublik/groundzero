@@ -3,7 +3,7 @@ import styled from "@emotion/styled";
 export const Container = styled.div<{ isSelected: boolean }>`
   display: flex;
   justify-content: space-between;
-  background-color: ${(props) => (props.isSelected ? "#ffe4c1" : "#ffe1f1")};
+  background-color: ${(props) => (props.isSelected ? "#fff" : "#ffe1f1")};
   border: 1px solid ${(props) => (props.isSelected ? "#ebb570" : "#f7b2d7")};
   padding: 5px;
   border-radius: 4px;

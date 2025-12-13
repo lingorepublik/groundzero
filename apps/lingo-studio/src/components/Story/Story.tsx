@@ -18,22 +18,21 @@ import {
 } from "./Story.styles";
 import type { SavedStory } from "shared";
 import { useStories, useUpdateStory } from "react-query";
-import React, { ReactNode, useState } from "react";
+import { ReactNode, useState } from "react";
 import { UpdateStoryForm } from "../UpdateStoryForm";
 import { StoryLocaleForm } from "../StoryLocaleForm";
 import { StoryLocales } from "../StoryLocales";
-import { useNavigate } from "react-router";
+import { useNavigate, useParams } from "react-router";
 
 type Props = {
   index: number;
-  selectedId: string;
-  setSelectedId: React.Dispatch<React.SetStateAction<string>>;
 };
 
-function Story({ index, selectedId, setSelectedId }: Props) {
+function Story({ index }: Props) {
   const { data, isLoading } = useStories();
   const updateStoryMutation = useUpdateStory();
   const navigate = useNavigate();
+  const { storyId } = useParams();
 
   const [showUpdateForm, setShowUpdateForm] = useState(false);
   const [showLocalesForm, setShowLocalesForm] = useState(false);
@@ -51,7 +50,6 @@ function Story({ index, selectedId, setSelectedId }: Props) {
       return;
     }
 
-    setSelectedId(storyId);
     navigate(`/stories/chapters/${storyId}`);
   };
 
@@ -78,7 +76,7 @@ function Story({ index, selectedId, setSelectedId }: Props) {
   return (
     <>
       {!showUpdateForm ? (
-        <Container isSelected={story._id === selectedId}>
+        <Container isSelected={storyId === story._id}>
           <StoryContent>
             <NavDiv onClick={() => handleNavigation(story._id)}>
               <LevelTier>
