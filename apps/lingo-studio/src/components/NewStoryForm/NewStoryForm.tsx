@@ -10,6 +10,7 @@ import {
   FormLabel,
 } from "@mui/material";
 import { LEVELS, TIERS, type Story } from "shared";
+import React from "react";
 
 type Props = {
   setShowForm: React.Dispatch<React.SetStateAction<boolean>>;

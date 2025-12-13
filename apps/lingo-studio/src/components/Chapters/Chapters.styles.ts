@@ -7,7 +7,6 @@ export const Container = styled.div`
   flex-direction: column;
   gap: 15px;
   overflow-y: auto;
-  background-color: aliceblue;
 `;
 
 export const ChaptersWrapper = styled.div``;

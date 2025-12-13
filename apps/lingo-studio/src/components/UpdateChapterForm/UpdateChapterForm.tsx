@@ -32,7 +32,6 @@ function UpdateChapterForm({ chapter, setShowForm }: Props) {
   const updateChapterMutation = useUpdateChapter(chapter.storyId.toString());
 
   const onSubmit: SubmitHandler<SavedChapter> = (data) => {
-    console.log(data);
     updateChapterMutation?.mutate({ id: data._id, chapter: data });
     setShowForm(false);
   };

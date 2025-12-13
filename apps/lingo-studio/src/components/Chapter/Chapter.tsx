@@ -2,8 +2,11 @@ import { useFetchChapters, useUpdateChapter } from "react-query";
 import {
   ChapterContent,
   Container,
+  IdSeq,
+  NavDiv,
   RightColumn,
-  StyledNavLink,
+  Tier,
+  Title,
   UtilityButtons,
 } from "./Chapter.styles";
 import { IconButton } from "@mui/material";
@@ -15,15 +18,19 @@ import { useState } from "react";
 import { UpdateChapterForm } from "../UpdateChapterForm";
 import { ChapterLocaleForm } from "../ChapterLocaleForm";
 import { ChapterLocales } from "../ChapterLocales";
+import { useNavigate } from "react-router";
 
 type Props = {
   index: number;
+  selectedId: string;
+  setSelectedId: React.Dispatch<React.SetStateAction<string>>;
   storyId?: string;
 };
 
-function Chapter({ index, storyId }: Props) {
+function Chapter({ index, storyId, selectedId, setSelectedId }: Props) {
   const { data } = useFetchChapters(storyId);
   const updateChapterMutation = useUpdateChapter(storyId);
+  const navigate = useNavigate();
 
   const [showUpdateForm, setShowUpdateForm] = useState(false);
   const [showLocalesForm, setShowLocalesForm] = useState(false);
@@ -33,6 +40,11 @@ function Chapter({ index, storyId }: Props) {
   }
 
   const chapter = data[index];
+
+  const handleNavigation = () => {
+    setSelectedId(chapter._id);
+    navigate(`/stories/chapters/${chapter.storyId}/blocks/${chapter._id}`);
+  };
 
   const handleArrowClick = (index: number, arrow: "up" | "down") => {
     const seq1 =
@@ -55,21 +67,29 @@ function Chapter({ index, storyId }: Props) {
   return (
     <>
       {!showUpdateForm ? (
-        <Container>
+        <Container isSelected={selectedId === chapter._id}>
           <ChapterContent>
-            <StyledNavLink
-              to={`/studio/chapters/${chapter.storyId}/blocks/${chapter._id}`}
-              style={({ isActive }) => ({
-                backgroundColor: isActive ? "aquamarine" : "white",
-              })}
-            >
-              <div>id: {chapter._id}</div>
-              <div>seq: {chapter.seq}</div>
-              <div>tier: {chapter.tier}</div>
-              <div>title: {chapter.title}</div>
-              <div>isDeleted: {chapter.isDeleted ? "true" : "false"}</div>
-              <div>isPublished: {chapter.isPublished ? "true" : "false"}</div>
-            </StyledNavLink>
+            <NavDiv onClick={handleNavigation}>
+              <Tier>{chapter.tier}</Tier>
+              <Title>{chapter.title}</Title>
+
+              <IdSeq>
+                <div>
+                  <strong>isDeleted:</strong>{" "}
+                  {chapter.isDeleted ? "true" : "false"}
+                </div>
+                <div>
+                  <strong>isPublished:</strong>{" "}
+                  {chapter.isPublished ? "true" : "false"}
+                </div>
+                <div>
+                  <strong>id:</strong> {chapter._id}
+                </div>
+                <div>
+                  <strong>seq:</strong> {chapter.seq}
+                </div>
+              </IdSeq>
+            </NavDiv>
             {!showLocalesForm && <ChapterLocales chapterId={chapter._id} />}
             {showLocalesForm ? (
               <ChapterLocaleForm

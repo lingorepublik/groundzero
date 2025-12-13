@@ -6,6 +6,7 @@ import {
   useUpdateStoryLocales,
 } from "react-query";
 import { Language, LANGUAGES, StoryLocale } from "shared";
+import React from "react";
 
 type Props = {
   storyId: string;
@@ -54,9 +55,13 @@ function StoryLocaleForm({ storyId, setShowLocalesForm }: Props) {
       onSubmit={handleSubmit(onSubmit)}
       sx={{ display: "flex", flexDirection: "column", gap: 1, marginTop: 1 }}
     >
-      <span>Story Locales</span>
       {localesLangs?.map((lang) => (
-        <TextField label={lang} {...register(lang)} size="small" />
+        <TextField
+          label={lang}
+          {...register(lang)}
+          size="small"
+          sx={{ backgroundColor: "white" }}
+        />
       ))}
       <Box sx={{ display: "flex", gap: 1 }}>
         <Button type="submit" variant="contained" size="small">
