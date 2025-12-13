@@ -52,11 +52,15 @@ function ChapterLocaleForm({ chapterId, setShowLocalesForm }: Props) {
     <Box
       component="form"
       onSubmit={handleSubmit(onSubmit)}
-      sx={{ display: "flex", flexDirection: "column", gap: 1, marginTop: 1 }}
+      sx={{ display: "flex", flexDirection: "column", gap: 1 }}
     >
-      <span>Chapter Locales</span>
       {localesLangs?.map((lang) => (
-        <TextField label={lang} {...register(lang)} size="small" />
+        <TextField
+          label={lang}
+          {...register(lang)}
+          size="small"
+          sx={{ backgroundColor: "white" }}
+        />
       ))}
       <Box sx={{ display: "flex", gap: 1 }}>
         <Button type="submit" variant="contained" size="small">

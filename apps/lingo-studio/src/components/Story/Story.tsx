@@ -9,33 +9,51 @@ import {
   StoryContent,
   UtilityButtons,
   RightColumn,
-  StyledNavLink,
+  LevelTier,
+  Level,
+  Tier,
+  IdSeq,
+  Title,
+  NavDiv,
 } from "./Story.styles";
 import type { SavedStory } from "shared";
 import { useStories, useUpdateStory } from "react-query";
-import { useState } from "react";
+import React, { ReactNode, useState } from "react";
 import { UpdateStoryForm } from "../UpdateStoryForm";
 import { StoryLocaleForm } from "../StoryLocaleForm";
 import { StoryLocales } from "../StoryLocales";
+import { useNavigate } from "react-router";
 
 type Props = {
   index: number;
+  selectedId: string;
+  setSelectedId: React.Dispatch<React.SetStateAction<string>>;
 };
 
-function Story({ index }: Props) {
+function Story({ index, selectedId, setSelectedId }: Props) {
   const { data, isLoading } = useStories();
   const updateStoryMutation = useUpdateStory();
+  const navigate = useNavigate();
 
   const [showUpdateForm, setShowUpdateForm] = useState(false);
   const [showLocalesForm, setShowLocalesForm] = useState(false);
 
   if (isLoading) {
-    return <Container>Loading...!</Container>;
+    return <div>Loading...!</div>;
   }
 
   if (!data) {
     return;
   }
+
+  const handleNavigation = (storyId: string) => {
+    if (!storyId) {
+      return;
+    }
+
+    setSelectedId(storyId);
+    navigate(`/stories/chapters/${storyId}`);
+  };
 
   const story: SavedStory = data[index];
 
@@ -60,23 +78,34 @@ function Story({ index }: Props) {
   return (
     <>
       {!showUpdateForm ? (
-        <Container>
+        <Container isSelected={story._id === selectedId}>
           <StoryContent>
-            <StyledNavLink
-              to={`/studio/chapters/${story._id}`}
-              style={({ isActive }) => ({
-                backgroundColor: isActive ? "aquamarine" : "white",
-              })}
-            >
-              <div>id: {story._id}</div>
-              <div>seq: {story.seq}</div>
-              <div>title: {story.title}</div>
-              <div>note: {story.note}</div>
-              <div>Level: {story.level}</div>
-              <div>Tier: {story.tier}</div>
-              <div>isDeleted: {story.isDeleted ? "true" : "false"}</div>
-              <div>isPublished: {story.isPublished ? "true" : "false"}</div>
-            </StyledNavLink>
+            <NavDiv onClick={() => handleNavigation(story._id)}>
+              <LevelTier>
+                <Level>{story.level as ReactNode}</Level>
+                <Tier>{story.tier}</Tier>
+              </LevelTier>
+              <div>
+                <Title>{story.title}</Title>
+                {story.note}
+              </div>
+              <IdSeq>
+                <div>
+                  <strong>IsDeleted:</strong>{" "}
+                  {story.isDeleted ? "true" : "false"}
+                </div>
+                <div>
+                  <strong>IsPublished:</strong>{" "}
+                  {story.isPublished ? "true" : "false"}
+                </div>
+                <div>
+                  <strong>Id:</strong> {story._id}
+                </div>
+                <div>
+                  <strong>Seq:</strong> {story.seq}
+                </div>
+              </IdSeq>
+            </NavDiv>
             {!showLocalesForm && <StoryLocales storyId={story._id} />}
             {showLocalesForm ? (
               <StoryLocaleForm

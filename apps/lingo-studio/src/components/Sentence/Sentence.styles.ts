@@ -10,6 +10,7 @@ export const SentenceParagraph = styled.div`
   flex: 1;
   display: flex;
   flex-wrap: wrap;
+  font-size: 18px;
 `;
 
 type SentenceSectionProps = {

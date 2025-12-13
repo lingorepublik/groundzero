@@ -19,11 +19,9 @@ function StoryLocales({ storyId }: Props) {
   return (
     <Container>
       {data.map((data) => (
-        <>
-          <div>
-            Title: {data.lang}: {data.titleTranslation}
-          </div>
-        </>
+        <p>
+          <strong>{data.lang}:</strong> {data.titleTranslation}
+        </p>
       ))}
     </Container>
   );

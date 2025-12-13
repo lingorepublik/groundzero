@@ -10,7 +10,7 @@ function App() {
       <Main>
         <Routes>
           <Route
-            path="studio"
+            path="stories"
             element={
               <>
                 <Stories />

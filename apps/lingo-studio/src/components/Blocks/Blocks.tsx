@@ -2,6 +2,7 @@ import {
   BlockContent,
   BlockWrapper,
   Container,
+  IdSeq,
   RightColumn,
   UtilityButtons,
 } from "./Blocks.styles";
@@ -24,7 +25,7 @@ function Blocks() {
   const [localeBlockIndex, setLocaleBlockIndex] = useState<number | null>(null);
   const { chapterId } = useParams();
   const { data: blocks, isLoading } = useFetchBlocks(chapterId);
-  const updateBlockMutation = useUpdateBlock();
+  const updateBlockMutation = useUpdateBlock(chapterId);
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -36,6 +37,7 @@ function Blocks() {
 
   return (
     <Container>
+      <div>BLOCKS</div>
       {blocks && blocks.length > 0 ? (
         <>
           {blocks?.map((block, index) => (
@@ -55,18 +57,36 @@ function Blocks() {
               ) : (
                 <BlockWrapper>
                   <BlockContent>
-                    <div>{block.seq}</div>
-                    <div>{block._id}</div>
                     {block.contentType === "SENTENCE" ? (
-                      <>
-                        <Sentence block={block} />
-                        {localeBlockIndex !== index && (
-                          <BlockLocales blockId={block._id} />
-                        )}
-                      </>
+                      <Sentence block={block} />
                     ) : (
-                      <div>ILLUSTRATION</div>
+                      <div>
+                        <strong>Illu. Url:</strong>
+                        {block.content as string}
+                      </div>
                     )}
+                    <IdSeq>
+                      <div>
+                        <strong>IsDeleted: </strong>
+                        {block.isDeleted ? "true" : "false"}
+                      </div>
+                      <div>
+                        <strong>IsPublished: </strong>
+                        {block.isPublished ? "true" : "false"}
+                      </div>
+                      <div>
+                        <strong>Id: </strong>
+                        {block._id}
+                      </div>
+                      <div>
+                        <strong>Seq: </strong>
+                        {block.seq}
+                      </div>
+                    </IdSeq>
+                    {block.contentType === "SENTENCE" &&
+                      localeBlockIndex !== index && (
+                        <BlockLocales blockId={block._id} />
+                      )}
                     {localeBlockIndex === index ? (
                       <BlockLocaleForm
                         blockId={block._id}

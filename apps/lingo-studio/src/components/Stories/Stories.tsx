@@ -2,8 +2,10 @@ import { useStories } from "react-query";
 import { StoriesWrapper, Container } from "./Stories.styles";
 import { NewStoryButton } from "../NewStoryButton";
 import { Story } from "../Story";
+import { useState } from "react";
 
 function Stories() {
+  const [selectedId, setSelectedId] = useState("");
   const { data, isLoading } = useStories();
 
   if (isLoading) {
@@ -12,6 +14,7 @@ function Stories() {
 
   return (
     <Container>
+      <div>STORIES</div>
       {data && data.length > 0 ? (
         <StoriesWrapper>
           {data.map((story, index) => (
@@ -19,7 +22,11 @@ function Stories() {
               {index === 0 && (
                 <NewStoryButton seq={story.seq / 2} topSeparator={false} />
               )}
-              <Story index={index} />
+              <Story
+                index={index}
+                selectedId={selectedId}
+                setSelectedId={setSelectedId}
+              />
               <NewStoryButton
                 seq={((data[index + 1]?.seq || story.seq + 1) + story.seq) / 2}
                 bottomSeparator={index < data.length - 1}

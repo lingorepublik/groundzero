@@ -1,4 +1,5 @@
 import { useFetchBlockLocales } from "react-query";
+import { Container } from "./BlockLocales.styles.ts";
 
 type Props = {
   blockId: string;
@@ -12,15 +13,17 @@ function BlockLocales({ blockId }: Props) {
   }
 
   return (
-    <div>
+    <Container>
       {data.map((locale) => (
         <div key={locale._id}>
-          <div>{locale.lang}</div>
+          <div>
+            <strong>{locale.lang}</strong>
+          </div>
           <div>translation: {locale.sentenceTranslation}</div>
           {locale.insight && <div>insight: {locale.insight}</div>}
         </div>
       ))}
-    </div>
+    </Container>
   );
 }
 

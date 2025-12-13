@@ -7,8 +7,7 @@ const fetchBlocksByChapterId: QueryFunction<SavedBlock[]> = async ({
   const [, chapterId] = queryKey;
 
   const response = await fetch(`http://localhost:3013/block/${chapterId}`);
-  const data = await response.json();
-  return data;
+  return await response.json();
 };
 
 export const useFetchBlocks = (chapterId?: string) => {

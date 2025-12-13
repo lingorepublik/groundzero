@@ -15,31 +15,27 @@ function BlockLocaleForm({ blockId, setUpdateBlockIndex }: Props) {
   const { data: langData } = useFetchLang();
   const updateBlockLocalesMutation = useUpdateBlockLocales(blockId);
 
-  // console.log(data);
-
   const localesLangs =
     langData && LANGUAGES.filter((language) => language !== langData.lang);
 
   const defaultValues = {};
 
-  localesLangs?.forEach((lang) => {
-    const locale = data?.filter((l) => l.lang === lang)[0];
+  if (data) {
+    localesLangs?.forEach((lang) => {
+      const locale = data?.filter((l) => l.lang === lang)[0];
 
-    defaultValues[locale?.lang] = {
-      translation: locale?.sentenceTranslation || "",
-      insight: locale?.insight || "",
-    };
-  });
-
-  console.log(defaultValues);
+      defaultValues[locale?.lang] = {
+        translation: locale?.sentenceTranslation || "",
+        insight: locale?.insight || "",
+      };
+    });
+  }
 
   const { register, handleSubmit } = useForm({
     defaultValues: defaultValues,
   });
 
   const onSubmit = (data: any) => {
-    console.log(data);
-
     const formattedData = Object.entries(data).map(([key, value]) => ({
       blockId: blockId,
       lang: key as Language,
