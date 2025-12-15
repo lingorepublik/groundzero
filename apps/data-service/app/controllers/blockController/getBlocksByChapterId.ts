@@ -8,7 +8,6 @@ export const getBlocksByChapterId = async (
 ) => {
   try {
     const { chapterId } = req.params;
-    console.log(chapterId);
     const blocks = await BlockModel.find({
       chapterId: chapterId,
       isDeleted: false,
@@ -16,7 +15,6 @@ export const getBlocksByChapterId = async (
       seq: 1,
     });
 
-    console.log(blocks);
     res.send(blocks);
   } catch (e) {
     next(e);
