@@ -19,7 +19,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 const port = process.env.PORT;
-const dbConnectionString = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@data-service.qymhovm.mongodb.net/article-data?appName=data-service`;
+const dbConnectionString = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@data-service.qymhovm.mongodb.net/lingo-db?appName=data-service`;
 
 app.use("/story", storyRouter);
 app.use("/story-locale", storyLocaleRouter);

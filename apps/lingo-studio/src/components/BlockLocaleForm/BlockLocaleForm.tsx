@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useFetchBlockLocales, useFetchLang } from "react-query";
-import { BlockLocale, Language, LANGUAGES } from "shared";
+import { Language, LANGUAGES } from "shared";
 import { Box, Button, TextField } from "@mui/material";
 import { useForm } from "react-hook-form";
 import { useUpdateBlockLocales } from "react-query/src/api-hooks/useUpdateBlockLocales/useUpdateBlockLocales.ts";
@@ -53,8 +53,6 @@ function BlockLocaleForm({ blockId, setUpdateBlockIndex }: Props) {
   }, [langData, data]);
 
   const onSubmit = (data: Record<string, RefinedLocales>) => {
-    console.log(data);
-
     const formattedData = Object.entries(data)
       .map(([key, value]) => {
         if (value.translation || value.insight) {
@@ -67,8 +65,6 @@ function BlockLocaleForm({ blockId, setUpdateBlockIndex }: Props) {
         }
       })
       .filter((l) => l !== undefined);
-
-    console.log(formattedData);
 
     updateBlockLocalesMutation.mutate(formattedData);
     setUpdateBlockIndex(null);
