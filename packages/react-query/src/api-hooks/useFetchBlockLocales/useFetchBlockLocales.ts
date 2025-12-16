@@ -6,7 +6,9 @@ const fetchBlockLocalesByBlockId: QueryFunction<SavedBlockLocale[]> = async ({
 }): Promise<SavedBlockLocale[]> => {
   const [, id] = queryKey;
 
-  const response = await fetch(`http://localhost:3013/block-locale/${id}`);
+  const response = await fetch(
+    `http://localhost:3013/api/v1/block-locale/${id}`,
+  );
   return await response.json();
 };
 

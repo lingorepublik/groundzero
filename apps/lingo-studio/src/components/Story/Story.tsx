@@ -3,6 +3,7 @@ import ExpandLessOutlinedIcon from "@mui/icons-material/ExpandLessOutlined";
 import ExpandMoreOutlinedIcon from "@mui/icons-material/ExpandMoreOutlined";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import GTranslateOutlinedIcon from "@mui/icons-material/GTranslateOutlined";
+import NewReleasesOutlinedIcon from "@mui/icons-material/NewReleasesOutlined";
 
 import {
   Container,
@@ -137,6 +138,26 @@ function Story({ index }: Props) {
                   }}
                 >
                   <GTranslateOutlinedIcon />
+                </IconButton>
+                <IconButton
+                  onClick={() => {
+                    updateStoryMutation.mutate({
+                      id: data[index]._id,
+                      story: {
+                        ...data[index],
+                        isPublished: !story.isPublished,
+                      },
+                    });
+                  }}
+                  sx={{
+                    width: 20,
+                    height: 20,
+                    padding: 0,
+                  }}
+                >
+                  <NewReleasesOutlinedIcon
+                    color={story.isPublished ? "primary" : "action"}
+                  />
                 </IconButton>
               </UtilityButtons>
             )}

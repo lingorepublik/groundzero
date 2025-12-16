@@ -6,7 +6,9 @@ const fetchStoryLocalesByStoryId: QueryFunction<SavedStoryLocale[]> = async ({
 }): Promise<SavedStoryLocale[]> => {
   const [, id] = queryKey;
 
-  const response = await fetch(`http://localhost:3013/story-locale/${id}`);
+  const response = await fetch(
+    `http://localhost:3013/api/v1/story-locale/${id}`,
+  );
   const data = await response.json();
 
   return data;

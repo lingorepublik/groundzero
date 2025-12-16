@@ -1,0 +1,12 @@
+### create many block locales
+POST http://localhost:3013/api/v1/block-locale
+Content-Type: application/json
+
+[
+  {"blockId": "693c31b4b7d838bcd0fc135e", "lang": "en-US", "sentenceTranslation":"english translation aaa"},
+  {"blockId": "693c31b4b7d838bcd0fc135e", "lang": "fr-FR", "sentenceTranslation":"french translation aaa", "insight":  "this is the french insight"}
+]
+
+### get block locales by block id
+GET http://localhost:3013/api/v1/block-locale/693aa8f6f60fce35bdcc508b
+Content-Type: application/json

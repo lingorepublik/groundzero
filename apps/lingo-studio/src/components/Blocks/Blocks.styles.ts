@@ -36,7 +36,7 @@ export const RightColumn = styled.div`
 
 export const UtilityButtons = styled.div`
   display: flex;
-  gap: 10px;
+  gap: 15px;
 `;
 
 export const IdSeq = styled.div`

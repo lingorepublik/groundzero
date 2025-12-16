@@ -2,7 +2,7 @@ import { BlockLocale } from "shared";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 const updateBlockLocales = async (blockLocales: BlockLocale[]) => {
-  const response = await fetch("http://localhost:3013/block-locale", {
+  const response = await fetch("http://localhost:3013/api/v1/block-locale", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(blockLocales),

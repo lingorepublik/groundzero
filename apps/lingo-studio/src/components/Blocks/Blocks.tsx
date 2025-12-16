@@ -15,6 +15,7 @@ import { IconButton } from "@mui/material";
 import GTranslateOutlinedIcon from "@mui/icons-material/GTranslateOutlined";
 import ExpandLessOutlinedIcon from "@mui/icons-material/ExpandLessOutlined";
 import ExpandMoreOutlinedIcon from "@mui/icons-material/ExpandMoreOutlined";
+import NewReleasesOutlinedIcon from "@mui/icons-material/NewReleasesOutlined";
 import { useState } from "react";
 import { UpdateBlockForm } from "../UpdateBlockForm";
 import { BlockLocales } from "../BlockLocales";
@@ -118,6 +119,26 @@ function Blocks() {
                             <GTranslateOutlinedIcon />
                           </IconButton>
                         )}
+                        <IconButton
+                          onClick={() => {
+                            updateBlockMutation.mutate({
+                              id: block._id,
+                              block: {
+                                ...block,
+                                isPublished: !block.isPublished,
+                              },
+                            });
+                          }}
+                          sx={{
+                            width: 20,
+                            height: 20,
+                            padding: 0,
+                          }}
+                        >
+                          <NewReleasesOutlinedIcon
+                            color={block.isPublished ? "primary" : "action"}
+                          />
+                        </IconButton>
                       </UtilityButtons>
                     )}
                   </BlockContent>

@@ -2,7 +2,7 @@ import { Story, SavedStory } from "shared";
 import { useQueryClient, useMutation } from "@tanstack/react-query";
 
 const createStory = async (story: Story): Promise<SavedStory> => {
-  const response = await fetch("http://localhost:3013/story/", {
+  const response = await fetch("http://localhost:3013/api/v1/story/", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(story),

@@ -6,7 +6,9 @@ const fetchChaptersByStoryId: QueryFunction<SavedChapter[]> = async ({
 }): Promise<SavedChapter[]> => {
   const [, storyId] = queryKey;
 
-  const response = await fetch(`http://localhost:3013/chapter/${storyId}`);
+  const response = await fetch(
+    `http://localhost:3013/api/v1/chapter/${storyId}`,
+  );
   const data = await response.json();
 
   return data;

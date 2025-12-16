@@ -1,4 +1,4 @@
-import { type PropsWithChildren } from "react";
+import { ButtonHTMLAttributes, type PropsWithChildren } from "react";
 import {
   NavigatorButton,
   Content,
@@ -50,7 +50,8 @@ type Props = {
   isDisabled: boolean;
   isActive: boolean;
   progress: number;
-} & PropsWithChildren;
+} & PropsWithChildren &
+  ButtonHTMLAttributes<HTMLButtonElement>;
 
 export default function ArticleNavigatorButton({
   children,
@@ -58,6 +59,7 @@ export default function ArticleNavigatorButton({
   isDisabled,
   isActive,
   progress,
+  ...buttonProps
 }: Props) {
   const { background, wave, text } = getColors(
     isStarred,
@@ -68,7 +70,7 @@ export default function ArticleNavigatorButton({
 
   return (
     <Container>
-      <NavigatorButton backgroundColor={background}>
+      <NavigatorButton backgroundColor={background} {...buttonProps}>
         <Content textColor={text}>{children}</Content>
         <ArticleNavigatorButtonProgress
           progress={progress}

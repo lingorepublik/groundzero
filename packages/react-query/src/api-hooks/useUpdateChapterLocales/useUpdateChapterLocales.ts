@@ -4,7 +4,7 @@ import { useQueryClient, useMutation } from "@tanstack/react-query";
 const updateChapterLocales = async (
   chapterLocales: ChapterLocale[],
 ): Promise<SavedChapterLocale[]> => {
-  const response = await fetch("http://localhost:3013/chapter-locale", {
+  const response = await fetch("http://localhost:3013/api/v1/chapter-locale", {
     method: "post",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(chapterLocales),
