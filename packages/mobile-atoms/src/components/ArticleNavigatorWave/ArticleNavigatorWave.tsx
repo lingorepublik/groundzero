@@ -24,6 +24,7 @@ export default function ArticleNavigatorWave({ numButtons }: Props) {
         />
         {Array.from({ length: numButtons }).map((_, i) => (
           <path
+            key={i}
             d={`M ${44 * i} 23 A 21 21 0 0 ${1 - (i % 2)} ${44 * (i + 1)} 23`}
             stroke={Colors.primaryDull}
             strokeWidth="2"

@@ -8,7 +8,7 @@ const updateChapter = async ({
   id: string;
   chapter: Chapter;
 }): Promise<SavedChapter> => {
-  const response = await fetch(`http://localhost:3013/chapter/${id}`, {
+  const response = await fetch(`http://localhost:3013/api/v1/chapter/${id}`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(chapter),

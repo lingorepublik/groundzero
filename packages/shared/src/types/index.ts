@@ -1,4 +1,4 @@
-export { type Catalog } from "./catalog";
+export { type StoryUI } from "./storyUI";
 export * from "./tier";
 export * from "./language";
 export * from "./level";
@@ -8,4 +8,6 @@ export * from "./chapter";
 export * from "./chapterLocale";
 export * from "./sentence";
 export * from "./block";
-export * from "./blockLocale.ts";
+export * from "./blockLocale";
+export * from "./chapterNavItemUI";
+export * from "./chapterWithBlocksAndLocales";

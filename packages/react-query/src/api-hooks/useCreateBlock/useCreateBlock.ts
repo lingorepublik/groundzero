@@ -2,7 +2,7 @@ import { Block, SavedBlock } from "shared";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 const createBlock = async (block: Block): Promise<SavedBlock> => {
-  const response = await fetch("http://localhost:3013/block/", {
+  const response = await fetch("http://localhost:3013/api/v1/block/", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(block),

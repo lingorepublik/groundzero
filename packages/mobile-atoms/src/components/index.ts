@@ -4,5 +4,5 @@ export * from "./ArticleNavigatorWave";
 export * from "./ArticleNavigatorButton";
 export * from "./ArticleNavigatorButtonProgress";
 export * from "./svg-icons";
-export * from "./CatalogEntryProgress";
-export * from "./CatalogEntryProgressCircle";
+export * from "./StoryEntryProgress";
+export * from "./StoryEntryProgressCircle";

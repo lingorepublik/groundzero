@@ -8,7 +8,7 @@ const updateBlock = async ({
   id: string;
   block: Block;
 }): Promise<SavedBlock> => {
-  const response = await fetch(`http://localhost:3013/block/${id}`, {
+  const response = await fetch(`http://localhost:3013/api/v1/block/${id}`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(block),

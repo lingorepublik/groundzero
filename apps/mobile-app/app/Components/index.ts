@@ -3,4 +3,4 @@ export * from "./ArticleFooter";
 export * from "./ArticleHeader";
 export * from "./ArticleBody";
 export * from "./Sentence";
-export * from "./CatalogEntry";
+export * from "./StoryEntry";

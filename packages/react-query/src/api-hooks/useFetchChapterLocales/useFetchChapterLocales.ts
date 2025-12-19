@@ -6,7 +6,9 @@ const fetchChapterLocalesByChapterId: QueryFunction<
 > = async ({ queryKey }): Promise<SavedChapterLocale[]> => {
   const [, id] = queryKey;
 
-  const response = await fetch(`http://localhost:3013/chapter-locale/${id}`);
+  const response = await fetch(
+    `http://localhost:3013/api/v1/chapter-locale/${id}`,
+  );
   return await response.json();
 };
 

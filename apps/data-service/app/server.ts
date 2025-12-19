@@ -2,16 +2,7 @@ import express, { Request, Response, ErrorRequestHandler } from "express";
 import createHttpError from "http-errors";
 import cors from "cors";
 import { config } from "dotenv";
-import {
-  catalogRouter,
-  articlePageRouter,
-  storyRouter,
-  storyLocaleRouter,
-  chapterRouter,
-  chapterLocaleRouter,
-  blockRouter,
-  blockLocaleRouter,
-} from "./routes";
+import { apiRouter } from "./routes";
 import mongoose from "mongoose";
 config();
 
@@ -21,14 +12,7 @@ app.use(express.json());
 const port = process.env.PORT;
 const dbConnectionString = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@data-service.qymhovm.mongodb.net/lingo-db?appName=data-service`;
 
-app.use("/story", storyRouter);
-app.use("/story-locale", storyLocaleRouter);
-app.use("/catalog", catalogRouter);
-app.use("/article-page", articlePageRouter);
-app.use("/chapter", chapterRouter);
-app.use("/chapter-locale", chapterLocaleRouter);
-app.use("/block", blockRouter);
-app.use("/block-locale", blockLocaleRouter);
+app.use("/api", apiRouter);
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 app.use((req: Request, res: Response) => {

@@ -22,4 +22,9 @@ const storySchema = new Schema<Story>(
   { timestamps: true },
 );
 
+storySchema.index(
+  { seq: 1 },
+  { partialFilterExpression: { isDeleted: false, isPublished: true } },
+);
+
 export const StoryModel = model("Story", storySchema);
