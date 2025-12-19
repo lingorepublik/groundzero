@@ -1,0 +1,13 @@
+### Verify jwt token
+GET http://localhost:2013/api/v1/verify
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OTQ1OGM4ZDk1ZjgwZDhiOWRlNWZiZmEiLCJ0aWVyIjoic3RhcnJlZCIsImlhdCI6MTc2NjI0NDYzOSwiZXhwIjoxNzY2MjQ1MjM5fQ.K8bSSkpNg2BbSxFw4iKa4ZvluB-vsrX0-e54d8lWDs4
+
+### Verify jwt token without Authorization header
+GET http://localhost:2013/api/v1/verify
+Content-Type: application/json
+
+### Verify jwt token with wrong token
+GET http://localhost:2013/api/v1/verify
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OTQ1OGM4ZDk1ZjgwZDhiOWRlNWZiZmEiLCJ0aWVyIjoic3RhcnJlZCIsImlhdCI6MTc2NjI0MDg4MiwiZXhwIjoxNzY2MjQxNDgyfQ.NuyWIjhdkKFtZ0SGAY8tIOeRDIwoErHQ3G5ShsiyYPG

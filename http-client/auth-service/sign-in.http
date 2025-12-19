@@ -1,0 +1,8 @@
+### login
+POST http://localhost:2013/api/v1/sign-in
+Content-Type: application/json
+
+{
+  "email": "malIN@emailegdss.com",
+  "password": "mY@passwords123"
+}
