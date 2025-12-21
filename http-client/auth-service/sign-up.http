@@ -1,0 +1,35 @@
+### register a new user
+POST http://localhost:2013/api/v1/sign-up
+Content-Type: application/json
+
+{
+  "email": "malIN@emailegdssd.com",
+  "password": "mY@passwords1",
+  "tier": "starred"
+}
+
+### register a new user with missing credentials
+POST http://localhost:2013/api/v1/sign-up
+Content-Type: application/json
+
+{
+  "email": "malin@email.com"
+}
+
+### register a new user with invalid email
+POST http://localhost:2013/api/v1/sign-up
+Content-Type: application/json
+
+{
+  "email": "malinemail.com",
+  "password": "my-password"
+}
+
+### register a new user with a weak password
+POST http://localhost:2013/api/v1/sign-up
+Content-Type: application/json
+
+{
+  "email": "malin@email.com",
+  "password": "mYpassword1"
+}
