@@ -1,13 +1,29 @@
 import express, { Request, Response, ErrorRequestHandler } from "express";
 import createHttpError from "http-errors";
 import cors from "cors";
-import { config } from "dotenv";
+import dotenv from "dotenv";
 import { apiRouter } from "./routes";
 import mongoose from "mongoose";
-config();
+
+dotenv.config({
+  path:
+    process.env.NODE_ENV === "production"
+      ? ".env.production"
+      : ".env.development",
+});
 
 const app = express();
-app.use(cors());
+
+app.use(
+  cors({
+    origin:
+      process.env.NODE_ENV === "development"
+        ? "http://localhost:4013"
+        : "https://api...",
+    credentials: true,
+  }),
+);
+
 app.use(express.json());
 const port = process.env.PORT;
 const dbConnectionString = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@data-service.qymhovm.mongodb.net/lingo-db?appName=data-service`;

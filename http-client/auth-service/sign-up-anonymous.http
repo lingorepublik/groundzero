@@ -1,0 +1,4 @@
+### register a new user
+GET
+
+Content-Type: application/json

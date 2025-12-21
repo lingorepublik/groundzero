@@ -2,6 +2,7 @@ import { Request, Response, NextFunction } from "express";
 import createHttpError from "http-errors";
 import jwt, { TokenExpiredError } from "jsonwebtoken";
 import { UserModel } from "../../models/UserModel";
+import { generateTokens, setRefreshTokenCookie } from "../../util";
 
 export const refreshController = async (
   req: Request,
@@ -9,14 +10,14 @@ export const refreshController = async (
   next: NextFunction,
 ) => {
   try {
-    const device = req.headers["user-agent"] || "unknown";
+    const device = req.body?.device || req.headers["user-agent"] || "unknown";
     const refreshToken = req.cookies.lr_rt;
 
     if (!refreshToken) {
       throw createHttpError(401, "Verification failed.");
     }
 
-    if (!process.env.JWT_SECRET || !process.env.JWT_REFRESH_SECRET) {
+    if (!process.env.JWT_REFRESH_SECRET) {
       throw createHttpError(500, "Internal Server Error.");
     }
 
@@ -48,15 +49,9 @@ export const refreshController = async (
       throw createHttpError(401, "Verification failed.");
     }
 
-    console.log(`Refresh token index: ${refreshTokenIndex}`);
-
     user.refreshTokens.splice(refreshTokenIndex, 1);
 
-    const newRefreshToken = jwt.sign(
-      { userId: payload.userId },
-      process.env.JWT_REFRESH_SECRET,
-      { expiresIn: "15d" },
-    );
+    const { token, refreshToken: newRefreshToken } = generateTokens(user);
 
     user.refreshTokens.push({
       token: newRefreshToken,
@@ -66,20 +61,9 @@ export const refreshController = async (
 
     await user.save();
 
-    res.cookie("lr_rt", newRefreshToken, {
-      httpOnly: true,
-      secure: true,
-      sameSite: "strict",
-      maxAge: 60 * 60 * 24 * 15,
-    });
+    setRefreshTokenCookie(res, newRefreshToken);
 
-    const token = jwt.sign(
-      { userId: user._id, tier: user.tier },
-      process.env.JWT_SECRET,
-      { expiresIn: "10m" },
-    );
-
-    res.send({ token, newRefreshToken });
+    res.send({ token });
   } catch (e) {
     next(e);
   }

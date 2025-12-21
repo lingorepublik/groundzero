@@ -3,9 +3,10 @@ POST http://localhost:2013/api/v1/sign-up
 Content-Type: application/json
 
 {
-  "email": "malIN@emailegdssd.com",
+  "email": "malIN@emaidlegs5dsssddfe.com",
   "password": "mY@passwords1",
-  "tier": "starred"
+  "tier": "starred",
+  "termsConsent": true
 }
 
 ### register a new user with missing credentials
@@ -13,7 +14,8 @@ POST http://localhost:2013/api/v1/sign-up
 Content-Type: application/json
 
 {
-  "email": "malin@email.com"
+  "password": "mY@passwords1",
+  "termsConsent": true
 }
 
 ### register a new user with invalid email
@@ -22,7 +24,8 @@ Content-Type: application/json
 
 {
   "email": "malinemail.com",
-  "password": "my-password"
+  "password": "my-password",
+  "termsConsent": true
 }
 
 ### register a new user with a weak password
@@ -31,5 +34,6 @@ Content-Type: application/json
 
 {
   "email": "malin@email.com",
-  "password": "mYpassword1"
+  "password": "mYpassword1",
+  "termsConsent": true
 }

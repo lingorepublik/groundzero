@@ -2,6 +2,7 @@ import { Request, Response, NextFunction } from "express";
 import createHttpError from "http-errors";
 import validator from "validator";
 import { UserModel } from "../../models/UserModel";
+import { generateTokens, setRefreshTokenCookie } from "../../util";
 
 export const signUpController = async (
   req: Request,
@@ -9,7 +10,15 @@ export const signUpController = async (
   next: NextFunction,
 ) => {
   try {
-    const { email, password, tier } = req.body;
+    const device = req.body.device || req.headers["user-agent"] || "unknown";
+    const { email, password, termsConsent, tier } = req.body;
+
+    if (!termsConsent) {
+      throw createHttpError(
+        400,
+        "Failed to register. You must consent for terms.",
+      );
+    }
 
     if (!email || !password) {
       throw createHttpError(400, "Failed to register. invalid credentials");
@@ -33,13 +42,26 @@ export const signUpController = async (
       throw createHttpError(400, "Failed to register. invalid credentials");
     }
 
-    await UserModel.create({
+    const user = await UserModel.create({
       email: emailLowerCase,
       password,
       tier,
+      termsConsent,
     });
 
-    res.send(`Registered successfully: ${emailLowerCase}`);
+    const { token, refreshToken } = generateTokens(user);
+
+    user.refreshTokens.push({
+      token: refreshToken,
+      device,
+      createdAt: new Date(),
+    });
+
+    await user.save();
+
+    setRefreshTokenCookie(res, refreshToken);
+
+    res.send({ token });
   } catch (e) {
     next(e);
   }

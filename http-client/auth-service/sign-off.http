@@ -1,0 +1,3 @@
+### sign off
+GET http://localhost:2013/api/v1/sign-off
+Cookie: lr_rt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OTQ4MzM5MTUyZGM5MTBlYTljM2VjYzciLCJpYXQiOjE3NjYzNDI5MDQsImV4cCI6MTc2NzYzODkwNH0.hjjLRaQmnWRsQ1JoxY6JG7Fh6xnpemAYpFaw4Y0hv-8
