@@ -11,3 +11,6 @@ export * from "./block";
 export * from "./blockLocale";
 export * from "./chapterNavItemUI";
 export * from "./chapterWithBlocksAndLocales";
+export * from "./credentials";
+export * from "./storyUI";
+export * from "./authenticatedRequest";

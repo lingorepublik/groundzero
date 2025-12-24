@@ -5,6 +5,7 @@ import createHttpError from "http-errors";
 import dotenv from "dotenv";
 import { apiRouter } from "./routes";
 import mongoose from "mongoose";
+
 dotenv.config({
   path:
     process.env.NODE_ENV === "production"
@@ -14,7 +15,17 @@ dotenv.config({
 
 const app = express();
 app.use(express.json());
-app.use(cors());
+
+app.use(
+  cors({
+    origin:
+      process.env.NODE_ENV === "development"
+        ? "http://localhost:5173"
+        : "https://api...",
+    credentials: true,
+  }),
+);
+
 app.use(cookieParser());
 const port = process.env.PORT || 2013;
 

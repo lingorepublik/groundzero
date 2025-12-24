@@ -1,5 +1,5 @@
-import { Request, Response, NextFunction } from "express";
-import { Chapter, ChapterNavItemUI } from "shared";
+import { Response, NextFunction } from "express";
+import { AuthenticatedRequest, Chapter, ChapterNavItemUI } from "shared";
 
 /**
  * TODOs
@@ -10,11 +10,16 @@ import { Chapter, ChapterNavItemUI } from "shared";
  * */
 
 export const getChaptersByStoryId = async (
-  req: Request,
+  req: AuthenticatedRequest,
   res: Response,
   next: NextFunction,
 ) => {
   try {
+    /**
+     * use this data to make data user specific
+     * */
+    const { userId, tier } = req.user;
+
     const { storyId } = req.params;
     const response = await fetch(
       `http://localhost:3013/api/v1/chapter/${storyId}`,

@@ -3,6 +3,7 @@ import createHttpError from "http-errors";
 import { UserModel } from "../../models/UserModel";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
+import { generateTokens, setRefreshTokenCookie } from "../../util";
 
 export const signInController = async (
   req: Request,
@@ -33,17 +34,7 @@ export const signInController = async (
       throw createHttpError(500);
     }
 
-    const token = jwt.sign(
-      { userId: user._id, tier: user.tier },
-      process.env.JWT_SECRET,
-      { expiresIn: "10m" },
-    );
-
-    const refreshToken = jwt.sign(
-      { userId: user._id },
-      process.env.JWT_REFRESH_SECRET,
-      { expiresIn: "15d" },
-    );
+    const { token, refreshToken } = generateTokens(user);
 
     const refreshTokenIndex = user.refreshTokens.findIndex(
       (token) => token.device === device,
@@ -66,12 +57,7 @@ export const signInController = async (
 
     await user.save();
 
-    res.cookie("lr_rt", refreshToken, {
-      httpOnly: true,
-      secure: true,
-      sameSite: "strict",
-      maxAge: 60 * 60 * 24 * 15,
-    });
+    setRefreshTokenCookie(res, refreshToken);
 
     res.send({
       token,

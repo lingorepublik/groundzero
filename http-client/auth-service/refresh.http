@@ -1,3 +1,3 @@
 ### access refresh endpoint with the refresh token
 GET http://localhost:2013/api/v1/refresh
-Cookie: lr_rt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OTQ3MGEyOGI2MjhhYzY4ZmRiN2NlZmMiLCJpYXQiOjE3NjYyNjM1ODAsImV4cCI6MTc2NzU1OTU4MH0.rqbw7gWpnA6GuEbICxJkScvNmFF2-bBhPyHqipQBU_o
+Cookie: lr_rt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OTQ4MzM5MTUyZGM5MTBlYTljM2VjYzciLCJpYXQiOjE3NjYzNjI2MjAsImV4cCI6MTc2NzY1ODYyMH0.kiQ-zKsyrMyiLn5xtUIaa07DPYVLWsDz4EN1XEAL4VY
