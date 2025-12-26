@@ -28,6 +28,8 @@ type CharacterContainerProps = {
 export const CharacterContainer = styled.div<CharacterContainerProps>`
   width: 50px;
   height: 50px;
+  min-width: 50px;
+  min-height: 50px;
   position: relative;
   font-size: 11px;
   display: flex;
@@ -77,4 +79,15 @@ export const CharacterExpression = styled.div<CharacterExpressionProps>`
           border-radius: 50%;
           border: solid 1px #666;
         `}
+`;
+
+export const SentenceWhole = styled.div`
+  color: forestgreen;
+  font-size: 14px;
+`;
+
+export const SentencesWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 `;

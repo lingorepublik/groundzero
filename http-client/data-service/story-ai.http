@@ -1,0 +1,12 @@
+### create story with ai
+POST http://localhost:3013/api/v1/story-ai/
+Content-Type: application/json
+
+{
+  "characters":  "john, maria",
+  "focus": "particip II",
+  "lang": "de-DE",
+  "level": "A1",
+  "seq": "1.125",
+  "setting": "zu hause"
+}

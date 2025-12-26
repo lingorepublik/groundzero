@@ -14,7 +14,7 @@ const storySchema = new Schema<Story>(
       },
     },
     level: { type: String, required: true },
-    tier: { type: String, required: true, enum: TIERS },
+    tier: { type: String, required: true, enum: TIERS, default: "free" },
     note: { type: String },
     isDeleted: { type: Boolean, default: false },
     isPublished: { type: Boolean, default: false },

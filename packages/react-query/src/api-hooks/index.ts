@@ -18,3 +18,6 @@ export * from "./useUpdateBlockLocales";
 export * from "./useFetchStoriesWithTranslationsByLangs";
 export * from "./useFetchChapterNavItems";
 export * from "./useFetchChapterAndBlocksWithLocales";
+export * from "./useTranslateAi";
+export * from "./useInsightAi";
+export * from "./useCreateSentenceSections";

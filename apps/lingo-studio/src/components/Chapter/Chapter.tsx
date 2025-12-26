@@ -94,6 +94,7 @@ function Chapter({ index, storyId }: Props) {
               <ChapterLocaleForm
                 chapterId={chapter._id}
                 setShowLocalesForm={setShowLocalesForm}
+                title={chapter.title}
               />
             ) : (
               <UtilityButtons>

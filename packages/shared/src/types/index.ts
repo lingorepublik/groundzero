@@ -14,3 +14,4 @@ export * from "./chapterWithBlocksAndLocales";
 export * from "./credentials";
 export * from "./storyUI";
 export * from "./authenticatedRequest";
+export * from "./storyAiRequestBody";

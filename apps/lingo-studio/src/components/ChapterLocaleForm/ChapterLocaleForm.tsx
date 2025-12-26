@@ -1,20 +1,25 @@
-import { Box, Button, TextField } from "@mui/material";
+import { Box, Button, IconButton, TextField } from "@mui/material";
 import { useForm } from "react-hook-form";
 import {
   useFetchLang,
   useFetchChapterLocales,
   useUpdateChapterLocales,
+  useTranslateAi,
 } from "react-query";
 import { ChapterLocale, Language, LANGUAGES } from "shared";
+import React from "react";
+import AutoAwesomeOutlinedIcon from "@mui/icons-material/AutoAwesomeOutlined";
 
 type Props = {
   chapterId: string;
   setShowLocalesForm: React.Dispatch<React.SetStateAction<boolean>>;
+  title: string;
 };
 
-function ChapterLocaleForm({ chapterId, setShowLocalesForm }: Props) {
+function ChapterLocaleForm({ chapterId, setShowLocalesForm, title }: Props) {
   const { data } = useFetchChapterLocales(chapterId);
   const { data: langData } = useFetchLang();
+  const translateMutation = useTranslateAi();
 
   const updateChapterLocalesMutation = useUpdateChapterLocales(chapterId);
 
@@ -32,7 +37,9 @@ function ChapterLocaleForm({ chapterId, setShowLocalesForm }: Props) {
     });
   }
 
-  const { handleSubmit, register } = useForm({ defaultValues: defaultValues });
+  const { handleSubmit, register, setValue } = useForm({
+    defaultValues: defaultValues,
+  });
 
   const onSubmit = (data: Record<Language, string>) => {
     const locales: ChapterLocale[] = [];
@@ -56,12 +63,44 @@ function ChapterLocaleForm({ chapterId, setShowLocalesForm }: Props) {
       sx={{ display: "flex", flexDirection: "column", gap: 1 }}
     >
       {localesLangs?.map((lang) => (
-        <TextField
-          label={lang}
-          {...register(lang)}
-          size="small"
-          sx={{ backgroundColor: "white" }}
-        />
+        <Box
+          sx={{
+            display: "flex",
+            gap: 1,
+            alignItems: "center",
+            justifyContent: "space-between",
+          }}
+        >
+          <TextField
+            label={lang}
+            {...register(lang)}
+            size="small"
+            sx={{ backgroundColor: "white", flex: 1 }}
+          />
+          <IconButton
+            onClick={() => {
+              translateMutation.mutate(
+                {
+                  text: title,
+                  langOrigin: langData?.lang,
+                  langTarget: lang,
+                },
+                {
+                  onSuccess: (data) => {
+                    setValue(lang, data.translation);
+                  },
+                },
+              );
+            }}
+            sx={{
+              width: 20,
+              height: 20,
+              padding: 0,
+            }}
+          >
+            <AutoAwesomeOutlinedIcon color="primary" />
+          </IconButton>
+        </Box>
       ))}
       <Box sx={{ display: "flex", gap: 1 }}>
         <Button type="submit" variant="contained" size="small">

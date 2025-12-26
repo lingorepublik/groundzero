@@ -1,0 +1,9 @@
+### create sentence sectiions with ai
+POST http://localhost:3013/api/v1/sentence-section-ai/
+Content-Type: application/json
+
+{
+  "blockId":  "694f09666588ccfd4ea73d0b",
+  "langOrigin": "de-DE",
+  "sentence": "Ich freue mich, weil ich mir den Termin aufschreibe."
+}
