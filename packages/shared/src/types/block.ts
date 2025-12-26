@@ -7,6 +7,7 @@ export const CONTENT_TYPES = ["ILLUSTRATION", "SENTENCE"] as const;
 export type ContentType = (typeof CONTENT_TYPES)[number];
 
 export const AVATAR_EXPRESSIONS = [
+  "NEUTRAL",
   "TALK",
   "SMILE",
   "LAUGH",
@@ -26,6 +27,7 @@ export type Block = {
   chapterId: ObjectId | string;
   seq: number;
   contentType: ContentType;
+  contentString: string;
   content: Illustration | Sentence;
   character?: string;
   avatarUrl?: string;

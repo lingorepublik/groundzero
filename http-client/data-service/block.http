@@ -18,9 +18,10 @@ POST http://localhost:3013/api/v1/block/
 Content-Type: application/json
 
 {
-  "chapterId": "69383890ec0f8b3523b7997f",
+  "chapterId": "693fe5861da5c2f988b4895f",
   "seq": 1,
   "contentType": "SENTENCE",
+  "contentString": "Ich ziehe mich um, while Ich zum Fitnessstudio gehen muss.",
   "content": [
     {
       "word": "I"
@@ -37,10 +38,10 @@ Content-Type: application/json
     {"word":  ",", "punctuationMark": true },
     {"word":  "while"},
     {"word":  "Ich"},
-    {"word":  "muss", "lemma":  "mussen"},
     {"word":  "zum"},
     {"word":  "Fitnessstudio"},
-    {"word":  "gehen"}
+    {"word":  "gehen"},
+    {"word":  "muss", "lemma":  "mussen"}
   ],
   "character": "Emma",
   "avatarUrl": "avatarUrl.jpg",
@@ -48,37 +49,6 @@ Content-Type: application/json
   "balloonDirection": "LEFT",
   "balloonType": "THINK",
   "audio": "audio.mp3"
-}
-
-### create block only with a sentence
-POST http://localhost:3013/api/v1/block/
-Content-Type: application/json
-
-{
-  "chapterId": "69383890ec0f8b3523b7997f",
-  "seq": 1,
-  "contentType": "SENTENCE",
-  "content": [
-    {
-      "word": "I"
-    },
-    {
-      "word": "ziehe",
-      "lemma": "sich umziehen"
-    },
-    {
-      "word": "mich",
-      "refIndex": 1
-    },
-    {"word": "um", "refIndex": 1 },
-    {"word":  ",", "punctuationMark": true },
-    {"word":  "while"},
-    {"word":  "Ich"},
-    {"word":  "muss", "lemma":  "mussen"},
-    {"word":  "zum"},
-    {"word":  "Fitnessstudio"},
-    {"word":  "gehen"}
-  ]
 }
 
 ### update block by id

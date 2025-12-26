@@ -7,7 +7,12 @@ import {
   UtilityButtons,
 } from "./Blocks.styles";
 import { useParams } from "react-router";
-import { useFetchBlocks, useUpdateBlock } from "react-query";
+import {
+  useCreateSentenceSections,
+  useFetchBlocks,
+  useFetchLang,
+  useUpdateBlock,
+} from "react-query";
 import Sentence from "../Sentence/Sentence.tsx";
 import { NewBlockButton } from "../NewBlockButton";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
@@ -16,6 +21,7 @@ import GTranslateOutlinedIcon from "@mui/icons-material/GTranslateOutlined";
 import ExpandLessOutlinedIcon from "@mui/icons-material/ExpandLessOutlined";
 import ExpandMoreOutlinedIcon from "@mui/icons-material/ExpandMoreOutlined";
 import NewReleasesOutlinedIcon from "@mui/icons-material/NewReleasesOutlined";
+import GrainOutlinedIcon from "@mui/icons-material/GrainOutlined";
 import { useState } from "react";
 import { UpdateBlockForm } from "../UpdateBlockForm";
 import { BlockLocales } from "../BlockLocales";
@@ -27,6 +33,8 @@ function Blocks() {
   const { chapterId } = useParams();
   const { data: blocks, isLoading } = useFetchBlocks(chapterId);
   const updateBlockMutation = useUpdateBlock(chapterId);
+  const createSentenceSectionsMutation = useCreateSentenceSections(chapterId);
+  const { data: langOrigin } = useFetchLang();
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -92,21 +100,41 @@ function Blocks() {
                       <BlockLocaleForm
                         blockId={block._id}
                         setUpdateBlockIndex={setLocaleBlockIndex}
+                        contentString={block.contentString}
                       />
                     ) : (
                       <UtilityButtons>
-                        <IconButton
-                          onClick={() => {
-                            setUpdateBlockIndex(index);
-                          }}
-                          sx={{
-                            width: 20,
-                            height: 20,
-                            padding: 0,
-                          }}
-                        >
-                          <EditOutlinedIcon />
-                        </IconButton>
+                        {block.content ? (
+                          <IconButton
+                            onClick={() => {
+                              setUpdateBlockIndex(index);
+                            }}
+                            sx={{
+                              width: 20,
+                              height: 20,
+                              padding: 0,
+                            }}
+                          >
+                            <EditOutlinedIcon />
+                          </IconButton>
+                        ) : (
+                          <IconButton
+                            onClick={() => {
+                              createSentenceSectionsMutation.mutate({
+                                blockId: block._id,
+                                sentence: block.contentString,
+                                langOrigin,
+                              });
+                            }}
+                            sx={{
+                              width: 20,
+                              height: 20,
+                              padding: 0,
+                            }}
+                          >
+                            <GrainOutlinedIcon />
+                          </IconButton>
+                        )}
                         {block.contentType === "SENTENCE" && (
                           <IconButton
                             onClick={() => setLocaleBlockIndex(index)}

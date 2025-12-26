@@ -1,16 +1,10 @@
-import { Controller, useForm, SubmitHandler } from "react-hook-form";
-import { useCreateStory, useFetchLang } from "react-query";
-import {
-  TextField,
-  Button,
-  Box,
-  FormControl,
-  ToggleButtonGroup,
-  ToggleButton,
-  FormLabel,
-} from "@mui/material";
-import { LEVELS, TIERS, type Story } from "shared";
-import React from "react";
+import { IconButton } from "@mui/material";
+import React, { useState } from "react";
+import NewStoryFormClassic from "./NewStoryFormClassic.tsx";
+import NewStoryFormAi from "./NewStoryFormAi.tsx";
+import { FormTypeButtons } from "./NewStoryForm.styles.ts";
+import EditNoteOutlinedIcon from "@mui/icons-material/EditNoteOutlined";
+import AutoAwesomeOutlinedIcon from "@mui/icons-material/AutoAwesomeOutlined";
 
 type Props = {
   setShowForm: React.Dispatch<React.SetStateAction<boolean>>;
@@ -18,108 +12,38 @@ type Props = {
 };
 
 function NewStoryForm({ seq, setShowForm }: Props) {
-  const createStoryMutation = useCreateStory();
-  const { data } = useFetchLang();
-
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    control,
-  } = useForm<Story>();
-
-  const onSubmit: SubmitHandler<Story> = (data) => {
-    createStoryMutation.mutate(data);
-    setShowForm(false);
-  };
-
-  if (!data) {
-    return;
-  }
-
-  const lang = data.lang;
+  const [ai, setAi] = useState(true);
 
   return (
-    <Box
-      component="form"
-      onSubmit={handleSubmit(onSubmit)}
-      sx={{
-        display: "flex",
-        flexDirection: "column",
-        gap: 1,
-        width: "100%",
-        margin: "5px 0",
-        borderTop: "solid 1px #b0b0b0",
-        borderBottom: "solid 1px #b0b0b0",
-        padding: "15px",
-      }}
-    >
-      <input type="hidden" {...register("lang")} value={lang} />
-
-      <input type="hidden" {...register("seq")} value={seq} />
-
-      <TextField
-        label="Title"
-        {...register("title", { required: "Title is required" })}
-        error={!!errors.title}
-        helperText={errors.title?.message as string}
-        size="small"
-      />
-
-      <TextField label="Note" {...register("note")} size="small" />
-
-      <FormControl>
-        <FormLabel>Level</FormLabel>
-        <Controller
-          name="level"
-          control={control}
-          render={({ field }) => (
-            <ToggleButtonGroup
-              {...field}
-              exclusive
-              onChange={(_, value) => field.onChange(value)}
-              size="small"
-            >
-              {LEVELS[lang].map((level) => (
-                <ToggleButton value={level}>{level}</ToggleButton>
-              ))}
-            </ToggleButtonGroup>
-          )}
-        />
-      </FormControl>
-
-      <FormControl>
-        <FormLabel>Tier</FormLabel>
-        <Controller
-          name="tier"
-          control={control}
-          render={({ field }) => (
-            <ToggleButtonGroup
-              {...field}
-              exclusive
-              onChange={(_, value) => field.onChange(value)}
-              size="small"
-            >
-              {TIERS.map((tier) => (
-                <ToggleButton value={tier}>{tier}</ToggleButton>
-              ))}
-            </ToggleButtonGroup>
-          )}
-        />
-      </FormControl>
-
-      <Box sx={{ display: "flex", gap: 1 }}>
-        <Button type="submit" variant="contained" size="small">
-          Create
-        </Button>
-        <Button size="small" type="reset">
-          Reset
-        </Button>
-        <Button color="error" size="small" onClick={() => setShowForm(false)}>
-          Close
-        </Button>
-      </Box>
-    </Box>
+    <>
+      <FormTypeButtons>
+        <IconButton
+          onClick={() => setAi(true)}
+          sx={{
+            width: 20,
+            height: 20,
+            padding: 0,
+          }}
+        >
+          <AutoAwesomeOutlinedIcon color={ai ? "primary" : "action"} />
+        </IconButton>
+        <IconButton
+          onClick={() => setAi(false)}
+          sx={{
+            width: 20,
+            height: 20,
+            padding: 0,
+          }}
+        >
+          <EditNoteOutlinedIcon color={ai ? "action" : "primary"} />
+        </IconButton>
+      </FormTypeButtons>
+      {ai ? (
+        <NewStoryFormAi seq={seq} setShowForm={setShowForm} />
+      ) : (
+        <NewStoryFormClassic seq={seq} setShowForm={setShowForm} />
+      )}
+    </>
   );
 }
 

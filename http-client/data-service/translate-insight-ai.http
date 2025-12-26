@@ -1,0 +1,19 @@
+### translate text with ai
+POST http://localhost:3013/api/v1/translate-insight-ai/translate/
+Content-Type: application/json
+
+{
+  "text":  "Das Frühstück ist gemacht",
+  "langOrigin": "de-DE",
+  "langTarget": "si-LK"
+}
+
+### get insight with ai
+POST http://localhost:3013/api/v1/translate-insight-ai/insight/
+Content-Type: application/json
+
+{
+  "text":  "Das Frühstück ist gemacht",
+  "langOrigin": "de-DE",
+  "langTarget": "fr-FR"
+}

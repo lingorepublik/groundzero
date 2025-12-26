@@ -10,7 +10,7 @@ const chapterSchema = new Schema<Chapter>({
   },
   title: { type: String, required: true },
   seq: { type: Number, required: true },
-  tier: { type: String, required: true, enum: TIERS },
+  tier: { type: String, required: true, enum: TIERS, default: "free" },
   isDeleted: { type: Boolean, default: false },
   isPublished: { type: Boolean, default: false },
 });

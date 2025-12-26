@@ -5,6 +5,8 @@ import {
   Container,
   SentenceParagraph,
   SentenceSection,
+  SentencesWrapper,
+  SentenceWhole,
 } from "./Sentence.styles.ts";
 
 type Props = {
@@ -26,15 +28,20 @@ function Sentence({ block }: Props) {
           />
         </CharacterContainer>
       )}
-      <SentenceParagraph>
-        {sentence.map((sentenceSection, index) => (
-          <SentenceSection
-            zeroMarginLeft={index === 0 || sentenceSection.punctuationMark}
-          >
-            {sentenceSection.word}
-          </SentenceSection>
-        ))}
-      </SentenceParagraph>
+      <SentencesWrapper>
+        <SentenceWhole>{block.contentString}</SentenceWhole>
+        {sentence && (
+          <SentenceParagraph>
+            {sentence.map((sentenceSection, index) => (
+              <SentenceSection
+                zeroMarginLeft={index === 0 || sentenceSection.punctuationMark}
+              >
+                {sentenceSection.word}
+              </SentenceSection>
+            ))}
+          </SentenceParagraph>
+        )}
+      </SentencesWrapper>
       {character && balloonDirection === "RIGHT" && (
         <CharacterContainer renderedDirection="right">
           {character}

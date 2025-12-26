@@ -1,9 +1,15 @@
 import React, { useEffect } from "react";
-import { useFetchBlockLocales, useFetchLang } from "react-query";
+import {
+  useFetchBlockLocales,
+  useFetchLang,
+  useInsightAi,
+  useTranslateAi,
+} from "react-query";
 import { Language, LANGUAGES } from "shared";
-import { Box, Button, TextField } from "@mui/material";
+import { Box, Button, IconButton, TextField } from "@mui/material";
 import { useForm } from "react-hook-form";
 import { useUpdateBlockLocales } from "react-query/src/api-hooks/useUpdateBlockLocales/useUpdateBlockLocales.ts";
+import AutoAwesomeOutlinedIcon from "@mui/icons-material/AutoAwesomeOutlined";
 
 type RefinedLocales = {
   translation: string;
@@ -20,17 +26,24 @@ type FormValues = {
 type Props = {
   blockId: string;
   setUpdateBlockIndex: React.Dispatch<React.SetStateAction<number | null>>;
+  contentString: string;
 };
 
-function BlockLocaleForm({ blockId, setUpdateBlockIndex }: Props) {
+function BlockLocaleForm({
+  blockId,
+  setUpdateBlockIndex,
+  contentString,
+}: Props) {
   const { data: langData } = useFetchLang();
   const { data } = useFetchBlockLocales(blockId);
   const updateBlockLocalesMutation = useUpdateBlockLocales(blockId);
+  const translateAiMutation = useTranslateAi();
+  const insightAiMutation = useInsightAi();
 
   const localesLangs =
     langData && LANGUAGES.filter((language) => language !== langData.lang);
 
-  const { register, handleSubmit, reset } = useForm<FormValues>({
+  const { register, handleSubmit, reset, setValue } = useForm<FormValues>({
     defaultValues: {},
     shouldUnregister: true,
   });
@@ -78,20 +91,84 @@ function BlockLocaleForm({ blockId, setUpdateBlockIndex }: Props) {
     >
       {localesLangs?.map((lang) => (
         <Box sx={{ display: "flex", flexDirection: "column", gap: 1.5 }}>
-          <TextField
-            label={`${lang} Translation`}
-            {...register(`${lang}.translation`)}
-            size="small"
-            fullWidth
-          />
-          <TextField
-            label={`${lang} Insight`}
-            {...register(`${lang}.insight`)}
-            size="small"
-            multiline
-            minRows={3}
-            fullWidth
-          />
+          <Box
+            sx={{
+              display: "flex",
+              gap: 1,
+              alignItems: "center",
+              justifyContent: "space-between",
+            }}
+          >
+            <TextField
+              label={`${lang} Translation`}
+              {...register(`${lang}.translation`)}
+              size="small"
+              fullWidth
+            />
+            <IconButton
+              onClick={() => {
+                translateAiMutation.mutate(
+                  {
+                    text: contentString,
+                    langOrigin: langData?.lang,
+                    langTarget: lang,
+                  },
+                  {
+                    onSuccess: (data) => {
+                      setValue(`${lang}.translation`, data.translation);
+                    },
+                  },
+                );
+              }}
+              sx={{
+                width: 20,
+                height: 20,
+                padding: 0,
+              }}
+            >
+              <AutoAwesomeOutlinedIcon color="primary" />
+            </IconButton>
+          </Box>
+          <Box
+            sx={{
+              display: "flex",
+              gap: 1,
+              alignItems: "center",
+              justifyContent: "space-between",
+            }}
+          >
+            <TextField
+              label={`${lang} Insight`}
+              {...register(`${lang}.insight`)}
+              size="small"
+              multiline
+              minRows={3}
+              fullWidth
+            />
+            <IconButton
+              onClick={() => {
+                insightAiMutation.mutate(
+                  {
+                    text: contentString,
+                    langOrigin: langData?.lang,
+                    langTarget: lang,
+                  },
+                  {
+                    onSuccess: (data) => {
+                      setValue(`${lang}.insight`, data.insight);
+                    },
+                  },
+                );
+              }}
+              sx={{
+                width: 20,
+                height: 20,
+                padding: 0,
+              }}
+            >
+              <AutoAwesomeOutlinedIcon color="primary" />
+            </IconButton>
+          </Box>
         </Box>
       ))}
 
