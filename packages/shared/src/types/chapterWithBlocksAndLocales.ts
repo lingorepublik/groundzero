@@ -1,6 +1,9 @@
-import { Block } from "./block.ts";
+import { Block, SavedBlock } from "./block.ts";
 
-export type FetchedBlock = Omit<Block, "seq" | "isDeleted" | "isPublished"> & {
+export type FetchedBlock = Omit<
+  SavedBlock,
+  "seq" | "isDeleted" | "isPublished"
+> & {
   insight?: string;
   translation?: string;
 };

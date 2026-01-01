@@ -78,6 +78,11 @@ function StoryLocaleForm({ storyId, setShowLocalesForm }: Props) {
             {...register(lang)}
             size="small"
             sx={{ backgroundColor: "white", flex: 1 }}
+            slotProps={{
+              inputLabel: {
+                shrink: true,
+              },
+            }}
           />
           <IconButton
             onClick={() => {

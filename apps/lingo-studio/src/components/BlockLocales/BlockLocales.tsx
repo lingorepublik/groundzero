@@ -1,5 +1,5 @@
 import { useFetchBlockLocales } from "react-query";
-import { Container } from "./BlockLocales.styles.ts";
+import { Container, Translation } from "./BlockLocales.styles.ts";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 
@@ -21,7 +21,7 @@ function BlockLocales({ blockId }: Props) {
           <div>
             <strong>{locale.lang}</strong>
           </div>
-          <div>translation: {locale.sentenceTranslation}</div>
+          <Translation>{locale.sentenceTranslation}</Translation>
           {locale.insight && (
             <div>
               insight:

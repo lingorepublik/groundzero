@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import { Colors } from "mobile-atoms";
+import { Link } from "react-router";
 
 export const Container = styled.header`
   padding: 20px 10px;
@@ -43,6 +44,14 @@ export const TestCircle = styled.div`
   border-radius: 50%;
   background-color: #eaeaea;
   cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const StyledLink = styled(Link)`
+  text-decoration: none;
+  color: #15857c;
 `;
 
 export const Trophies = styled.div`

@@ -4,6 +4,7 @@ import ExpandMoreOutlinedIcon from "@mui/icons-material/ExpandMoreOutlined";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import GTranslateOutlinedIcon from "@mui/icons-material/GTranslateOutlined";
 import NewReleasesOutlinedIcon from "@mui/icons-material/NewReleasesOutlined";
+import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 
 import {
   Container,
@@ -158,6 +159,24 @@ function Story({ index }: Props) {
                   <NewReleasesOutlinedIcon
                     color={story.isPublished ? "primary" : "action"}
                   />
+                </IconButton>
+                <IconButton
+                  onClick={() => {
+                    updateStoryMutation.mutate({
+                      id: data[index]._id,
+                      story: {
+                        ...data[index],
+                        isDeleted: true,
+                      },
+                    });
+                  }}
+                  sx={{
+                    width: 20,
+                    height: 20,
+                    padding: 0,
+                  }}
+                >
+                  <DeleteOutlineOutlinedIcon color="error" />
                 </IconButton>
               </UtilityButtons>
             )}

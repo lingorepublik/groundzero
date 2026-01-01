@@ -11,4 +11,5 @@ export const Container = styled.main`
 
 export const ChapterBodyWrapper = styled.div`
   flex: 1;
+  overflow-y: auto;
 `;

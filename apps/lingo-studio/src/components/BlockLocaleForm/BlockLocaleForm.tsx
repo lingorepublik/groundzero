@@ -104,6 +104,12 @@ function BlockLocaleForm({
               {...register(`${lang}.translation`)}
               size="small"
               fullWidth
+              multiline
+              slotProps={{
+                inputLabel: {
+                  shrink: true,
+                },
+              }}
             />
             <IconButton
               onClick={() => {
@@ -144,6 +150,11 @@ function BlockLocaleForm({
               multiline
               minRows={3}
               fullWidth
+              slotProps={{
+                inputLabel: {
+                  shrink: true,
+                },
+              }}
             />
             <IconButton
               onClick={() => {

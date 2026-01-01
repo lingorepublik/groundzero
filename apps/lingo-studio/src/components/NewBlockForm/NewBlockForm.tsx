@@ -45,12 +45,12 @@ function NewBlockForm({ chapterId, seq, setShowForm }: Props) {
       Object.entries(data).filter(([_, v]) => v !== undefined && v !== ""),
     );
 
-    if (
-      !cleanedData.content ||
-      (Array.isArray(cleanedData.content) && cleanedData.content.length === 0)
-    ) {
-      return;
-    }
+    // if (
+    //   !cleanedData.content ||
+    //   (Array.isArray(cleanedData.content) && cleanedData.content.length === 0)
+    // ) {
+    //   return;
+    // }
 
     createBlockMutation?.mutate(cleanedData as Block);
     setShowForm(false);
@@ -121,6 +121,13 @@ function NewBlockForm({ chapterId, seq, setShowForm }: Props) {
         >
           <SentenceSectionView sentence={sentence} setSentence={setSentence} />
 
+          <TextField
+            label="Content string"
+            {...register("contentString")}
+            size="small"
+            multiline
+            rows={4}
+          />
           <TextField label="Audio" {...register("audio")} size="small" />
           <TextField
             label="Character"
