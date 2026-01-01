@@ -20,6 +20,7 @@ import { UpdateChapterForm } from "../UpdateChapterForm";
 import { ChapterLocaleForm } from "../ChapterLocaleForm";
 import { ChapterLocales } from "../ChapterLocales";
 import { useNavigate, useParams } from "react-router";
+import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 
 type Props = {
   index: number;
@@ -143,6 +144,24 @@ function Chapter({ index, storyId }: Props) {
                   <NewReleasesOutlinedIcon
                     color={chapter.isPublished ? "primary" : "action"}
                   />
+                </IconButton>
+                <IconButton
+                  onClick={() =>
+                    updateChapterMutation?.mutate({
+                      id: chapter._id,
+                      chapter: {
+                        ...chapter,
+                        isDeleted: true,
+                      },
+                    })
+                  }
+                  sx={{
+                    width: 20,
+                    height: 20,
+                    padding: 0,
+                  }}
+                >
+                  <DeleteOutlineOutlinedIcon color="error" />
                 </IconButton>
               </UtilityButtons>
             )}

@@ -6,6 +6,7 @@ import {
   ArticleTitleTexts,
   ArticleTitleNative,
   ArticleTitleTranslated,
+  Illustration,
 } from "./ChaptersBody.styles.ts";
 import { Sentence } from "../Sentence";
 import { useFetchChapterAndBlocksWithLocales } from "react-query";
@@ -39,7 +40,11 @@ export default function ChaptersBody() {
           return block.contentType === "SENTENCE" ? (
             <Sentence key={index} block={block} />
           ) : (
-            <div>illustration</div>
+            // <Illustration src={block.content} />
+            <Illustration
+              src={`https://ik.imagekit.io/lingorepublik/story_illustrations/${block._id}.webp`}
+            />
+            // <div>illustration</div>
           );
         })}
       </ArticleTextContainer>

@@ -2,7 +2,7 @@ import { Language } from "shared";
 import { OpenAI } from "openai";
 import { insightSchema } from "./schemas/insightSchema";
 import { insightPrompt } from "./prompts/insightPrompt";
-import { OPEN_AI_MODEL } from "../../../../utils/openAiModel";
+import { OPEN_AI_MODEL } from "../../../../utils/openAiModels";
 
 export const generateInsight = async (
   text: string,

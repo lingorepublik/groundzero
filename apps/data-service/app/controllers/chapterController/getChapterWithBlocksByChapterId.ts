@@ -110,7 +110,7 @@ export const getChapterWithBlocksByChapterId = async (
             },
             {
               $project: {
-                _id: 0,
+                // _id: 0,
                 seq: 0,
                 __v: 0,
                 blockLevelLocales: 0,

@@ -3,6 +3,8 @@ import {
   BlockWrapper,
   Container,
   IdSeq,
+  Illustration,
+  IllustrationWrapper,
   RightColumn,
   UtilityButtons,
 } from "./Blocks.styles";
@@ -26,6 +28,7 @@ import { useState } from "react";
 import { UpdateBlockForm } from "../UpdateBlockForm";
 import { BlockLocales } from "../BlockLocales";
 import { BlockLocaleForm } from "../BlockLocaleForm";
+import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 
 function Blocks() {
   const [updateBlockIndex, setUpdateBlockIndex] = useState<number | null>(null);
@@ -69,10 +72,11 @@ function Blocks() {
                     {block.contentType === "SENTENCE" ? (
                       <Sentence block={block} />
                     ) : (
-                      <div>
-                        <strong>Illu. Url:</strong>
-                        {block.content as string}
-                      </div>
+                      <IllustrationWrapper>
+                        <Illustration
+                          src={`https://ik.imagekit.io/lingorepublik/story_illustrations/${block._id}.webp`}
+                        />
+                      </IllustrationWrapper>
                     )}
                     <IdSeq>
                       <div>
@@ -104,37 +108,34 @@ function Blocks() {
                       />
                     ) : (
                       <UtilityButtons>
-                        {block.content ? (
-                          <IconButton
-                            onClick={() => {
-                              setUpdateBlockIndex(index);
-                            }}
-                            sx={{
-                              width: 20,
-                              height: 20,
-                              padding: 0,
-                            }}
-                          >
-                            <EditOutlinedIcon />
-                          </IconButton>
-                        ) : (
-                          <IconButton
-                            onClick={() => {
-                              createSentenceSectionsMutation.mutate({
-                                blockId: block._id,
-                                sentence: block.contentString,
-                                langOrigin,
-                              });
-                            }}
-                            sx={{
-                              width: 20,
-                              height: 20,
-                              padding: 0,
-                            }}
-                          >
-                            <GrainOutlinedIcon />
-                          </IconButton>
-                        )}
+                        <IconButton
+                          onClick={() => {
+                            setUpdateBlockIndex(index);
+                          }}
+                          sx={{
+                            width: 20,
+                            height: 20,
+                            padding: 0,
+                          }}
+                        >
+                          <EditOutlinedIcon />
+                        </IconButton>
+                        <IconButton
+                          onClick={() => {
+                            createSentenceSectionsMutation.mutate({
+                              blockId: block._id,
+                              sentence: block.contentString,
+                              langOrigin,
+                            });
+                          }}
+                          sx={{
+                            width: 20,
+                            height: 20,
+                            padding: 0,
+                          }}
+                        >
+                          <GrainOutlinedIcon />
+                        </IconButton>
                         {block.contentType === "SENTENCE" && (
                           <IconButton
                             onClick={() => setLocaleBlockIndex(index)}
@@ -166,6 +167,24 @@ function Blocks() {
                           <NewReleasesOutlinedIcon
                             color={block.isPublished ? "primary" : "action"}
                           />
+                        </IconButton>
+                        <IconButton
+                          onClick={() =>
+                            updateBlockMutation.mutate({
+                              id: block._id,
+                              block: {
+                                ...block,
+                                isDeleted: true,
+                              },
+                            })
+                          }
+                          sx={{
+                            width: 20,
+                            height: 20,
+                            padding: 0,
+                          }}
+                        >
+                          <DeleteOutlineOutlinedIcon color="error" />
                         </IconButton>
                       </UtilityButtons>
                     )}

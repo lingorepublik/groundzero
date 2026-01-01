@@ -16,7 +16,7 @@ const blockSchema = new Schema<Block>({
   },
   seq: { type: Number, required: true },
   contentType: { type: String, required: true, enum: CONTENT_TYPES },
-  contentString: { type: String, required: true },
+  contentString: { type: String },
   content: { type: Schema.Types.Mixed },
   character: { type: String },
   avatarUrl: { type: String },

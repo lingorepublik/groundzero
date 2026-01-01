@@ -2,7 +2,7 @@ export const sentenceSectionSchema = {
   type: "object",
   additionalProperties: false,
   properties: {
-    sections: {
+    sentenceSections: {
       type: "array",
       items: {
         type: "object",

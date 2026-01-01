@@ -20,7 +20,7 @@ export const sentenceSectionPrompt = (sentence: string) => {
         }
         
         RULES FOR \`word\`
-        - \`word\` must be exactly the surface form as it appears in {{content}}.
+        - \`word\` must be exactly the surface form as it appears in the sentence.
         
         RULES FOR \`lemma\`
         - \`lemma\` is the base (dictionary) form of the word.
@@ -29,6 +29,7 @@ export const sentenceSectionPrompt = (sentence: string) => {
         - Attach the lemma ONLY to the first occurrence of the lexical unit.
         - eg1. in this sentence 'Ich merke mich den Titel.', lemma of 'merke' is 'sich merken' and refIndex of 'mich' is 1.
         - eg2. in this sentence 'Ich ziehe mich um', lemma of 'ziehe' is 'sich umziehen' and the refIndex of 'mich' and 'um' is 1 and no ref index is needed for 'ziehe'.
+        - eg3. 'Ich kann ein bisschen deutsch', lemma of ein is 'ein bisschen' and refIndex of 'bisschen' is 2.
         - when deciding on lemma, you have top consider separable verbs, reflexive verbs, etc...
         
         MULTI-WORD LEMMAS
@@ -55,5 +56,9 @@ export const sentenceSectionPrompt = (sentence: string) => {
           - be their own object
           - include \`"punctuationMark": "true"\`
           - have NO lemma
-          - have NO refIndex  `;
+          - have NO refIndex
+          - You MUST NOT add, infer, normalize, or duplicate any token.
+          - Adding any extra punctuation token is INVALID.
+          - if the sentence ends with '.' you MUST NOT add an additional section with another '.'.
+          `;
 };

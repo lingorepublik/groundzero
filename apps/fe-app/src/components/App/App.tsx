@@ -14,7 +14,7 @@ function App() {
     <Routes>
       <Route path="stories" element={<StoriesPage />} />
       <Route path="stories/:storyId" element={<ChaptersPage />}>
-        <Route index element={<div>loading...</div>} />
+        {/*<Route index element={<div>loading...</div>} />*/}
         <Route path="chapters/:chapterId" element={<ChaptersBody />} />
       </Route>
       <Route path="auth" element={<Auth />}>

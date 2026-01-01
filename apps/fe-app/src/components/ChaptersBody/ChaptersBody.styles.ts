@@ -1,11 +1,12 @@
 import styled from "@emotion/styled";
 
 export const Container = styled.section`
-  flex: 1;
+  //flex: 1;
   display: flex;
   flex-direction: column;
   padding: 0 30px;
-  overflow-y: auto;
+  //overflow-y: auto;
+  //background-color: coral;
 `;
 
 export const ArticleTitle = styled.div`
@@ -64,4 +65,11 @@ export const ArticleTextContainer = styled.div`
   padding-top: 20px;
   overflow-y: auto;
   /* background-color: red; */
+`;
+
+export const Illustration = styled.img`
+  width: 100%;
+  height: auto;
+  //border: solid 1px #eaeaea;
+  //box-shadow: 0 2px 4px #d5d5d5;
 `;

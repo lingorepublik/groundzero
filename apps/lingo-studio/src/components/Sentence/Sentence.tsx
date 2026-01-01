@@ -1,5 +1,6 @@
 import { Block, Sentence as SentenceType } from "shared";
 import {
+  CharacterAvatar,
   CharacterContainer,
   CharacterExpression,
   Container,
@@ -15,12 +16,15 @@ type Props = {
 
 function Sentence({ block }: Props) {
   const sentence = block.content as SentenceType;
-  const { character, balloonDirection, balloonType } = block;
+  const { character, balloonDirection, balloonType, avatarExpression } = block;
 
   return (
     <Container>
       {character && balloonDirection === "LEFT" && (
         <CharacterContainer renderedDirection="left">
+          <CharacterAvatar
+            src={`https://ik.imagekit.io/lingorepublik/characters/${character?.toLowerCase()}/headshots/${avatarExpression?.toLowerCase()}.webp?tr=w-100,h-100`}
+          />
           {character}
           <CharacterExpression
             renderedDirection="left"
@@ -44,7 +48,11 @@ function Sentence({ block }: Props) {
       </SentencesWrapper>
       {character && balloonDirection === "RIGHT" && (
         <CharacterContainer renderedDirection="right">
+          <CharacterAvatar
+            src={`https://ik.imagekit.io/lingorepublik/characters/${character?.toLowerCase()}/headshots/${avatarExpression?.toLowerCase()}.webp?tr=w-100,h-100`}
+          />
           {character}
+
           <CharacterExpression
             renderedDirection="right"
             ballonType={balloonType}

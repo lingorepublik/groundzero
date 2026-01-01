@@ -26,6 +26,7 @@ export const BlockContent = styled.div`
   display: flex;
   flex-direction: column;
   gap: 10px;
+  width: 100%;
 `;
 
 export const RightColumn = styled.div`
@@ -46,4 +47,16 @@ export const IdSeq = styled.div`
   display: flex;
   flex-direction: column;
   gap: 2px;
+`;
+
+export const IllustrationWrapper = styled.div`
+  width: 100%;
+  overflow: hidden;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+`;
+
+export const Illustration = styled.img`
+  width: 100%;
+  height: auto;
 `;

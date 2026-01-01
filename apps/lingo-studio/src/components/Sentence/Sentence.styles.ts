@@ -26,13 +26,15 @@ type CharacterContainerProps = {
 };
 
 export const CharacterContainer = styled.div<CharacterContainerProps>`
-  width: 50px;
-  height: 50px;
-  min-width: 50px;
-  min-height: 50px;
+  width: 80px;
+  height: 80px;
+  min-width: 80px;
+  min-height: 80px;
   position: relative;
   font-size: 11px;
   display: flex;
+  flex-direction: column;
+  align-items: center;
   justify-content: center;
   ${(props) =>
     props.renderedDirection === "left"
@@ -46,6 +48,12 @@ export const CharacterContainer = styled.div<CharacterContainerProps>`
           margin-right: 0;
           border-left: solid 1px #666;
         `}
+`;
+
+export const CharacterAvatar = styled.img`
+  width: 76px;
+  height: 76px;
+  z-index: 0;
 `;
 
 type CharacterExpressionProps = {
@@ -87,6 +95,7 @@ export const SentenceWhole = styled.div`
 `;
 
 export const SentencesWrapper = styled.div`
+  flex: 1;
   display: flex;
   flex-direction: column;
   gap: 10px;

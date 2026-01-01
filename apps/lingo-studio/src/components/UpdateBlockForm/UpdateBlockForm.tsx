@@ -56,12 +56,12 @@ function UpdateBlockForm({ block, setUpdateBlockIndex }: Props) {
       Object.entries(data).filter(([_, v]) => v !== undefined && v !== ""),
     ) as SavedBlock;
 
-    if (
-      !cleanedData.content ||
-      (Array.isArray(cleanedData.content) && cleanedData.content.length === 0)
-    ) {
-      return;
-    }
+    // if (
+    //   !cleanedData.content ||
+    //   (Array.isArray(cleanedData.content) && cleanedData.content.length === 0)
+    // ) {
+    //   return;
+    // }
 
     updateBlockMutation?.mutate({ id: cleanedData._id, block: cleanedData });
 
@@ -131,8 +131,20 @@ function UpdateBlockForm({ block, setUpdateBlockIndex }: Props) {
             gap: 1,
           }}
         >
-          <SentenceSectionView sentence={sentence} setSentence={setSentence} />
+          {sentence && sentence.length > 0 && (
+            <SentenceSectionView
+              sentence={sentence}
+              setSentence={setSentence}
+            />
+          )}
 
+          <TextField
+            label="Content string"
+            {...register("contentString")}
+            size="small"
+            multiline
+            rows={4}
+          />
           <TextField label="Audio" {...register("audio")} size="small" />
           <TextField
             label="Character"

@@ -88,6 +88,8 @@ function NewStoryFormAi({ seq, setShowForm }: Props) {
         error={!!errors.focus}
         helperText={errors.focus?.message as string}
         size="small"
+        multiline
+        rows={4}
       />
 
       <TextField
@@ -96,6 +98,8 @@ function NewStoryFormAi({ seq, setShowForm }: Props) {
         error={!!errors.setting}
         helperText={errors.setting?.message as string}
         size="small"
+        multiline
+        rows={4}
       />
 
       <TextField

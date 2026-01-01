@@ -3,10 +3,10 @@ POST http://localhost:3013/api/v1/story-ai/
 Content-Type: application/json
 
 {
-  "characters":  "john, maria",
-  "focus": "particip II",
+  "characters":  "Emma, Paul",
+  "focus": "Modal verb wollen in present tense. Wollen must be applied with all the personal pronouns Ich, du, Sie, sie, er, ihr, sie(they)",
   "lang": "de-DE",
   "level": "A1",
-  "seq": "1.125",
-  "setting": "zu hause"
+  "seq": "15.12545",
+  "setting": "Emma and Paul are plnning to open a cafe ‘The Dream Café’. they are brainstorming the business. they are standing in an empty, dusty room they just rented. They are imagining what their new business will look like and what their friends and customers will want."
 }
