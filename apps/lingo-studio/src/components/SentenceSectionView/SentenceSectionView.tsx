@@ -94,7 +94,7 @@ function SentenceSectionView({ sentence, setSentence }: Props) {
                       {sentenceSection.lemma && (
                         <div>lemma: {sentenceSection.lemma}</div>
                       )}
-                      {sentenceSection.refIndex && (
+                      {sentenceSection.refIndex !== undefined && (
                         <div>refIndex: {sentenceSection.refIndex}</div>
                       )}
                       {sentenceSection.punctuationMark && (

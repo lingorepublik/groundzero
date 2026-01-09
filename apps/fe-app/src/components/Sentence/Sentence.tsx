@@ -75,7 +75,7 @@ export default function Sentence({ block }: Props) {
           setInsight([]);
         } else {
           // TODO: word translation and insight will come from a different api end point... not included in blockContent
-          if (refIndex) {
+          if (refIndex !== undefined) {
             setSelectedWordIndex(refIndex);
             // setInsight([
             //   blockContent[refIndex].translation || null,
@@ -104,7 +104,11 @@ export default function Sentence({ block }: Props) {
   return (
     <Container alignRight={block.balloonDirection === "RIGHT"}>
       {block.character && block.balloonDirection === "LEFT" && (
-        <SentenseCharacter name={block.character} type={block.balloonType} />
+        <SentenseCharacter
+          name={block.character}
+          type={block.balloonType}
+          expression={block.avatarExpression}
+        />
       )}
       <ArticleText alignRight={block.balloonDirection === "RIGHT"}>
         <TextNative alignRight={block.balloonDirection === "RIGHT"}>
@@ -140,6 +144,7 @@ export default function Sentence({ block }: Props) {
           name={block.character}
           direction="RIGHT"
           type={block.balloonType}
+          expression={block.avatarExpression}
         />
       )}
     </Container>

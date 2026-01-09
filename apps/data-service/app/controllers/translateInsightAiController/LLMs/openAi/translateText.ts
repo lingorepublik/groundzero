@@ -2,7 +2,7 @@ import { Language } from "shared";
 import { OpenAI } from "openai";
 import { translatePrompt } from "./prompts/translatePrompt";
 import { translateSchema } from "./schemas/translateSchema";
-import { OPEN_AI_MODEL } from "../../../../utils/openAiModel";
+import { OPEN_AI_MODEL } from "../../../../utils/openAiModels";
 
 export const translateText = async (
   text: string,

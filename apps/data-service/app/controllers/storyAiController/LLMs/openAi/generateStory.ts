@@ -2,7 +2,7 @@ import { OpenAI } from "openai";
 import { storySchema } from "./schemas/storySchema";
 import { storyPrompt } from "./prompts/storyPrompt";
 import { StoryAiRequestBody } from "shared";
-import { OPEN_AI_MODEL } from "../../../../utils/openAiModel";
+import { OPEN_AI_MODEL } from "../../../../utils/openAiModels";
 
 export const generateStory = async (
   storyPromptMetaData: Partial<StoryAiRequestBody>,

@@ -9,12 +9,13 @@ import {
   ArticalNavigatorInner,
   ArticleNavigatorContainer,
   Container,
+  StyledLink,
   TestCircle,
   Trophies,
   Trophy,
 } from "./ChaptersHeader.styles.ts";
 import { useFetchChapterNavItems } from "react-query";
-import { useNavigate, useParams } from "react-router";
+import { useNavigate, useParams, Link } from "react-router";
 import { useEffect } from "react";
 
 export default function ChaptersHeader() {
@@ -46,7 +47,9 @@ export default function ChaptersHeader() {
 
   return (
     <Container>
-      <TestCircle />
+      <TestCircle>
+        <StyledLink to="/stories">&lsaquo;</StyledLink>
+      </TestCircle>
       <ArticleNavigatorContainer>
         <ArticalNavigatorEnd />
         <ArticalNavigator>

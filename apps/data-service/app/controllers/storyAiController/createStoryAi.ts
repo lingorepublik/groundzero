@@ -4,6 +4,7 @@ import { StoryAiRequestBody } from "shared";
 import { StoryModel } from "../../models/StoryModel";
 import { ChapterModel } from "../../models/ChapterModel";
 import { BlockModel } from "../../models/BlockModel";
+import { generateStoryGemini } from "./LLMs/gemini/generateStoryGemini";
 
 export const createStoryAi = async (
   req: Request<{}, {}, StoryAiRequestBody>,
@@ -11,7 +12,15 @@ export const createStoryAi = async (
   next: NextFunction,
 ) => {
   try {
+    // console.log(" askidj lka jslakjsd lkjsd alkj");
     const { lang, seq, characters, setting, focus, level, note } = req.body;
+
+    // const generatedStory = await generateStory({
+    //   characters,
+    //   setting,
+    //   focus,
+    //   level,
+    // });
 
     const generatedStory = await generateStory({
       characters,
@@ -19,6 +28,8 @@ export const createStoryAi = async (
       focus,
       level,
     });
+
+    // console.log(generatedStory, "asklasjdlkj ");
 
     const savedStory = await StoryModel.create({
       lang,

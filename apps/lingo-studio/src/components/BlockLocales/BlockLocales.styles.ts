@@ -6,3 +6,8 @@ export const Container = styled.div`
   flex-direction: column;
   gap: 5px;
 `;
+
+export const Translation = styled.div`
+  color: #23d280;
+  font-style: italic;
+`;

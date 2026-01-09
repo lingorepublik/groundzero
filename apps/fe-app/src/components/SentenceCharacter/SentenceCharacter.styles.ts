@@ -1,13 +1,13 @@
 import styled from "@emotion/styled";
-import type { BalloonDirection } from "shared";
+import type { AvatarExpression, BalloonDirection } from "shared";
 
 type ContainerProps = {
   direction: BalloonDirection;
 };
 
 export const Container = styled.div<ContainerProps>`
-  width: 50px;
-  min-width: 50px;
+  width: 80px;
+  min-width: 80px;
   display: flex;
   flex-direction: column;
   position: relative;
@@ -20,15 +20,15 @@ export const Container = styled.div<ContainerProps>`
 
 type AvatarProps = {
   name: string;
+  expression: AvatarExpression;
 };
 
 export const Avatar = styled.div<AvatarProps>`
-  width: 38px;
-  height: 38px;
-  background-color: gray;
-  border-radius: 50%;
-  background-image: ${({ name }) => `url(/${name}.png)`};
-  background-size: contain;
+  width: 68px;
+  height: 68px;
+  background-image: url(${(props) =>
+    `https://ik.imagekit.io/lingorepublik/characters/${props.name}/headshots/${props.expression.toLowerCase()}.webp?tr=w-100,h-100`});
+  background-size: cover;
 `;
 
 export const Name = styled.div`

@@ -8,7 +8,7 @@ import {
 import { Container } from "./SentenceSectionForm.styles.ts";
 import SaveIcon from "@mui/icons-material/Save";
 import CloseIcon from "@mui/icons-material/Close";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Sentence, SentenceSection } from "shared";
 
 type Props = {
@@ -34,8 +34,8 @@ function SentenceSectionForm({
 }: Props) {
   const [word, setWord] = useState(sentenceSection?.word || "");
   const [lemma, setLemma] = useState(sentenceSection?.lemma || "");
-  const [refIndex, setRefIndex] = useState<number | null>(
-    sentenceSection?.refIndex || null,
+  const [refIndex, setRefIndex] = useState<number | undefined>(
+    sentenceSection?.refIndex,
   );
   const [isPunctuationMark, setIsPunctuationMark] = useState<boolean>(
     !!sentenceSection?.punctuationMark,
@@ -57,7 +57,7 @@ function SentenceSectionForm({
       newSentenceSection.lemma = lemma;
     }
 
-    if (refIndex && refIndex >= 0) {
+    if (refIndex !== undefined && refIndex >= 0) {
       newSentenceSection.refIndex = refIndex;
     }
 

@@ -76,6 +76,11 @@ function ChapterLocaleForm({ chapterId, setShowLocalesForm, title }: Props) {
             {...register(lang)}
             size="small"
             sx={{ backgroundColor: "white", flex: 1 }}
+            slotProps={{
+              inputLabel: {
+                shrink: true,
+              },
+            }}
           />
           <IconButton
             onClick={() => {
